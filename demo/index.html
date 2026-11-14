@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repeat Check Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f3f5f8; --surface: #ffffff; --ink: #10161f; --ink-2: #4a5361; --ink-3: #6b7482; --line: #dde2e9;
+  --hero: #0f1720; --hero-ink: #f2f4f7; --hero-ink-2: #aab3c0; --flag: #eb6834; --flag-bg: #eb683426; --ok: #1b8a5a; --rec: #d33a2c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #121417; --surface: #1a1d21; --ink: #eef1f4; --ink-2: #b9c0ca; --ink-3: #8d96a3; --line: #2c3138;
+    --hero: #0a0e13; --flag: #f07a48; --flag-bg: #f07a4833; --ok: #3cb67f; --rec: #ef5b4c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #121417; --surface: #1a1d21; --ink: #eef1f4; --ink-2: #b9c0ca; --ink-3: #8d96a3; --line: #2c3138;
+  --hero: #0a0e13; --flag: #f07a48; --flag-bg: #f07a4833; --ok: #3cb67f; --rec: #ef5b4c;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 18px/1.55 "Source Sans 3", system-ui, sans-serif; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+header { background: var(--hero); color: var(--hero-ink); padding: 40px 0 36px; }
+h1 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: clamp(34px, 6vw, 56px); line-height: 1; letter-spacing: -.03em; margin: 0 0 12px; }
+header p { margin: 0; color: var(--hero-ink-2); max-width: 40em; }
+.controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 12px; }
+button, .file { font: inherit; font-weight: 600; font-size: 17px; border-radius: 10px; padding: 12px 20px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+button.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); min-width: 190px; }
+button.primary.recording { background: var(--rec); border-color: var(--rec); color: #fff; }
+.file input { display: none; }
+label.toggle { display: inline-flex; gap: 8px; align-items: center; font-size: 16px; color: var(--ink-2); cursor: pointer; }
+label.toggle input { width: 18px; height: 18px; accent-color: var(--ink); }
+button:focus-visible, .file:focus-within, label.toggle input:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
+#status { min-height: 26px; color: var(--ink-3); font-size: 16px; margin: 0 0 20px; }
+.heard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.label { font-size: 14px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 10px; }
+.words { font-size: 26px; line-height: 1.6; }
+.words span { padding: 1px 3px; border-radius: 4px; }
+.words span.flag { background: var(--flag-bg); box-shadow: inset 0 -3px 0 var(--flag); }
+.words span .c { font-size: 12px; color: var(--ink-3); vertical-align: super; margin-left: 2px; }
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.rule { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.rule h2 { font-size: 18px; margin: 0 0 4px; } .rule .sub { font-size: 15px; color: var(--ink-3); margin: 0 0 14px; }
+.bubble { font-size: 22px; line-height: 1.35; padding: 14px 16px; border-radius: 12px 12px 12px 4px; background: var(--page); border: 1px solid var(--line); }
+.bubble.ask { border-color: var(--flag); } .bubble.ok { border-color: var(--ok); }
+.cost { font-size: 15px; color: var(--ink-2); margin: 12px 0 0; }
+.note { font-size: 15px; color: var(--ink-3); margin: 24px 0 48px; }
+[hidden] { display: none !important; }
+@media (max-width: 640px) { .rules { grid-template-columns: 1fr; } .words { font-size: 22px; } }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Would the agent make you repeat?</h1>
+  <p>Say a short sentence in French, like a caller giving their name or address. Whisper listens through a simulated phone line, then two rules decide what the agent says back.</p>
+</div></header>
+<main class="wrap">
+  <div class="controls">
+    <button class="primary" id="rec" type="button">● Start recording</button>
+    <label class="file" tabindex="0">Choose a recording<input type="file" id="file" accept="audio/*"></label>
+    <label class="toggle"><input type="checkbox" id="phone" checked> Phone line</label>
+  </div>
+  <p id="status" aria-live="polite">Loading the settings…</p>
+
+  <section id="result" hidden>
+    <div class="heard">
+      <p class="label">What Whisper heard</p>
+      <div class="words" id="words"></div>
+    </div>
+    <div class="rules">
+      <div class="rule">
+        <h2>Today's rule</h2>
+        <p class="sub">Repeat the whole sentence when the sentence score is low</p>
+        <div class="bubble" id="b1"></div>
+        <p class="cost" id="c1"></p>
+      </div>
+      <div class="rule">
+        <h2>The fix</h2>
+        <p class="sub">Confirm only the words Whisper doubts</p>
+        <div class="bubble" id="b2"></div>
+        <p class="cost" id="c2"></p>
+      </div>
+    </div>
+  </section>
+  <p class="note">Runs on this computer with Whisper (the model is named above). Nothing is uploaded or saved. The two score lines are the ones chosen in the study so that at most 5 % of calls go through with a mistake.</p>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const status = msg => { $("status").textContent = msg; };
+let recorder = null, chunks = [], timer = 0;
+
+async function send(blob) {
+  status("Listening… (about 3 seconds of work per second of speech)");
+  $("rec").disabled = true;
+  try {
+    const r = await fetch("/transcribe?phone=" + ($("phone").checked ? "1" : "0"), { method: "POST", body: blob });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || r.status);
+    show(d);
+    status(`Done: ${d.duration.toFixed(1)} s of audio${d.phone ? ", through the phone line" : ""}.`);
+  } catch (e) {
+    status("Something went wrong: " + e.message);
+  } finally {
+    $("rec").disabled = false;
+  }
+}
+
+function show(d) {
+  $("result").hidden = false;
+  const flagged = new Set(d.flagged);
+  $("words").innerHTML = d.words.length ? d.words.map((w, i) => {
+    const s = document.createElement("span");
+    s.textContent = w.w;
+    if (flagged.has(i)) { s.className = "flag"; s.title = `Whisper is ${Math.round(100 * w.p)} % sure`; }
+    return s.outerHTML + (flagged.has(i) ? `<span class="c">${Math.round(100 * w.p)} %</span>` : "");
+  }).join(" ") : "<em>(nothing)</em>";
+  const nWords = d.words.length;
+  $("b1").textContent = d.repeat ? "Sorry, could you repeat that?" : "Got it, thank you.";
+  $("b1").className = "bubble " + (d.repeat ? "ask" : "ok");
+  $("c1").textContent = d.repeat
+    ? `The caller says all ${nWords} words again. Sentence score ${d.sentence_conf?.toFixed(2) ?? "none"}, line ${d.thresholds.sentence.toFixed(2)}.`
+    : `Nothing to repeat. Sentence score ${d.sentence_conf.toFixed(2)}, line ${d.thresholds.sentence.toFixed(2)}.`;
+  const doubt = d.flagged.map(i => d.words[i].w);
+  $("b2").textContent = doubt.length ? `Just to be sure: did you say “${doubt.join(" … ")}”?` : "Got it, thank you.";
+  $("b2").className = "bubble " + (doubt.length ? "ask" : "ok");
+  $("c2").textContent = doubt.length
+    ? `The caller confirms ${doubt.length} word${doubt.length > 1 ? "s" : ""} out of ${nWords}. A word is doubtful below ${Math.round(100 * d.thresholds.targeted)} % sure.`
+    : `No doubtful word (line: ${Math.round(100 * d.thresholds.targeted)} % sure).`;
+}
+
+$("rec").onclick = async () => {
+  if (recorder && recorder.state === "recording") { recorder.stop(); return; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    recorder = new MediaRecorder(stream); chunks = [];
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = () => {
+      clearTimeout(timer); stream.getTracks().forEach(t => t.stop());
+      $("rec").classList.remove("recording"); $("rec").textContent = "● Start recording";
+      send(new Blob(chunks, { type: recorder.mimeType }));
+    };
+    recorder.start();
+    $("rec").classList.add("recording"); $("rec").textContent = "■ Stop";
+    status("Recording… speak now (stops by itself after 15 seconds).");
+    timer = setTimeout(() => recorder.state === "recording" && recorder.stop(), 15000);
+  } catch (e) { status("The microphone is not available: " + e.message); }
+};
+$("file").onchange = e => { const f = e.target.files[0]; if (f) send(f); e.target.value = ""; };
+
+fetch("/thresholds").then(r => r.json()).then(t => status(`Ready (Whisper ${t.model === "turbo" ? "large-v3-turbo" : "small"}). Sentence line ${t.sentence.toFixed(2)}, doubtful word below ${Math.round(100 * t.targeted)} % sure.`))
+  .catch(() => status("The demo server is not running: start it with python demo/server.py"));
+</script>
+</body>
+</html>

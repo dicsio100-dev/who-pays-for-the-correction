@@ -1,0 +1,33 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 760 420' width='760' height='420'>
+<rect width='760' height='420' fill='#ffffff'/>
+<text x='0.0' y='22.0' font-size='17' fill='#10161f' text-anchor='start' font-weight='700' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">Same rule, different bill: callers asked to repeat (phone line, test speakers)</text>
+<text x='0.0' y='42.0' font-size='13' fill='#4a5361' text-anchor='start' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">The rule&#x27;s line is tuned on the other half of the speakers for each setting.</text>
+<line x1='56' x2='590' y1='370.0' y2='370.0' stroke='#e3e7ec'/>
+<text x='48.0' y='374.0' font-size='12' fill='#4a5361' text-anchor='end' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">0 %</text>
+<line x1='56' x2='590' y1='308.0' y2='308.0' stroke='#e3e7ec'/>
+<text x='48.0' y='312.0' font-size='12' fill='#4a5361' text-anchor='end' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">20 %</text>
+<line x1='56' x2='590' y1='246.0' y2='246.0' stroke='#e3e7ec'/>
+<text x='48.0' y='250.0' font-size='12' fill='#4a5361' text-anchor='end' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">40 %</text>
+<line x1='56' x2='590' y1='184.0' y2='184.0' stroke='#e3e7ec'/>
+<text x='48.0' y='188.0' font-size='12' fill='#4a5361' text-anchor='end' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">60 %</text>
+<line x1='56' x2='590' y1='122.0' y2='122.0' stroke='#e3e7ec'/>
+<text x='48.0' y='126.0' font-size='12' fill='#4a5361' text-anchor='end' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">80 %</text>
+<line x1='56' x2='590' y1='60.0' y2='60.0' stroke='#e3e7ec'/>
+<text x='48.0' y='64.0' font-size='12' fill='#4a5361' text-anchor='end' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">100 %</text>
+<text x='56.0' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">1 %</text>
+<text x='129.7' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">5 %</text>
+<text x='221.7' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">10 %</text>
+<text x='313.8' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">15 %</text>
+<text x='405.9' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">20 %</text>
+<text x='497.9' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">25 %</text>
+<text x='590.0' y='390.0' font-size='12' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">30 %</text>
+<text x='323.0' y='412.0' font-size='13' fill='#4a5361' text-anchor='middle' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">Calls allowed to go through with a mistake</text>
+<polyline points='56.0,75.5 74.4,100.3 92.8,134.4 111.2,153.0 129.7,159.2 148.1,159.2 166.5,168.5 184.9,171.6 203.3,174.7 221.7,190.2 240.1,193.3 258.6,224.3 277.0,227.4 295.4,236.7 313.8,246.0 332.2,255.3 350.6,255.3 369.0,261.5 387.4,267.7 405.9,273.9 424.3,277.0 442.7,283.2 461.1,289.4 479.5,298.7 497.9,311.1 516.3,311.1 534.8,311.1 553.2,314.2 571.6,320.4 590.0,323.5' fill='none' stroke='#2a78d6' stroke-width='2' stroke-linejoin='round'/>
+<polyline points='56.0,75.5 74.4,94.1 92.8,122.0 111.2,165.4 129.7,177.8 148.1,180.9 166.5,193.3 184.9,208.8 203.3,211.9 221.7,215.0 240.1,218.1 258.6,233.6 277.0,239.8 295.4,242.9 313.8,242.9 332.2,246.0 350.6,252.2 369.0,258.4 387.4,264.6 405.9,277.0 424.3,277.0 442.7,283.2 461.1,286.3 479.5,286.3 497.9,292.5 516.3,295.6 534.8,295.6 553.2,298.7 571.6,301.8 590.0,301.8' fill='none' stroke='#1baf7a' stroke-width='2' stroke-linejoin='round'/>
+<polyline points='56.0,66.2 74.4,75.5 92.8,81.7 111.2,109.6 129.7,112.7 148.1,118.9 166.5,128.2 184.9,131.3 203.3,134.4 221.7,137.5 240.1,149.9 258.6,193.3 277.0,202.6 295.4,208.8 313.8,211.9 332.2,218.1 350.6,218.1 369.0,224.3 387.4,236.7 405.9,239.8 424.3,239.8 442.7,239.8 461.1,246.0 479.5,249.1 497.9,255.3 516.3,255.3 534.8,255.3 553.2,267.7 571.6,277.0 590.0,280.1' fill='none' stroke='#eb6834' stroke-width='2' stroke-linejoin='round'/>
+<polyline points='56.0,60.0 74.4,65.3 92.8,91.0 111.2,101.2 129.7,106.5 148.1,106.5 166.5,116.7 184.9,122.0 203.3,132.2 221.7,147.7 240.1,153.0 258.6,189.3 277.0,189.3 295.4,199.5 313.8,199.5 332.2,209.7 350.6,225.2 369.0,230.5 387.4,230.5 405.9,230.5 424.3,230.5 442.7,230.5 461.1,240.7 479.5,240.7 497.9,251.3 516.3,256.2 534.8,256.2 553.2,266.8 571.6,271.7 590.0,271.7' fill='none' stroke='#6250d6' stroke-width='2' stroke-linejoin='round'/>
+<text x='598.0' y='275.7' font-size='13' fill='#10161f' text-anchor='start' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">Cameroon (Yaoundé)</text>
+<text x='598.0' y='292.7' font-size='13' fill='#10161f' text-anchor='start' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">Sub-Saharan Africa</text>
+<text x='598.0' y='309.7' font-size='13' fill='#10161f' text-anchor='start' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">Canada</text>
+<text x='598.0' y='327.5' font-size='13' fill='#10161f' text-anchor='start' font-weight='400' font-family="system-ui, -apple-system, &apos;Segoe UI&apos;, Helvetica, Arial, sans-serif">France</text>
+</svg>

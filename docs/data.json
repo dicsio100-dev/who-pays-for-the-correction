@@ -1,0 +1,2744 @@
+{
+ "generated": "2026-11-14",
+ "repo": "https://github.com/dicsio100-dev/who-pays-for-the-correction",
+ "labels": {
+  "france": "France",
+  "canada": "Canada",
+  "afrique_subsaharienne": "Sub-Saharan Africa",
+  "cameroun_yaounde": "Cameroon (Yaoundé)"
+ },
+ "order": [
+  "france",
+  "canada",
+  "afrique_subsaharienne",
+  "cameroun_yaounde"
+ ],
+ "stats": {
+  "clean_test": {
+   "france": {
+    "speakers": 25.0,
+    "clips": 100.0,
+    "wer": 0.059,
+    "wer_lo": 0.042,
+    "wer_hi": 0.08,
+    "wer_gap": 0.0,
+    "wer_gap_lo": 0.0,
+    "wer_gap_hi": 0.0,
+    "wer_gap_p": null,
+    "repeat": 0.67,
+    "repeat_lo": 0.55,
+    "repeat_hi": 0.78,
+    "repeat_gap": 0.0,
+    "repeat_gap_lo": 0.0,
+    "repeat_gap_hi": 0.0,
+    "repeat_gap_p": null,
+    "slip": 0.1,
+    "slip_gap": 0.0,
+    "slip_gap_lo": 0.0,
+    "slip_gap_hi": 0.0,
+    "slip_gap_p": null,
+    "auc": 0.582,
+    "misheard": 0.38,
+    "conf": -0.183,
+    "conf_gap": 0.0,
+    "conf_gap_lo": 0.0,
+    "conf_gap_hi": 0.0,
+    "conf_gap_p": null,
+    "repeat_ratio": 1.0
+   },
+   "canada": {
+    "speakers": 25.0,
+    "clips": 100.0,
+    "wer": 0.119,
+    "wer_lo": 0.057,
+    "wer_hi": 0.197,
+    "wer_gap": 0.059,
+    "wer_gap_lo": -0.002,
+    "wer_gap_hi": 0.147,
+    "wer_gap_p": 0.068,
+    "repeat": 0.74,
+    "repeat_lo": 0.65,
+    "repeat_hi": 0.83,
+    "repeat_gap": 0.07,
+    "repeat_gap_lo": -0.08,
+    "repeat_gap_hi": 0.22,
+    "repeat_gap_p": 0.414,
+    "slip": 0.07,
+    "slip_gap": -0.03,
+    "slip_gap_lo": -0.1,
+    "slip_gap_hi": 0.04,
+    "slip_gap_p": 0.552,
+    "auc": 0.653,
+    "misheard": 0.4,
+    "conf": -0.209,
+    "conf_gap": -0.026,
+    "conf_gap_lo": -0.081,
+    "conf_gap_hi": 0.03,
+    "conf_gap_p": 0.366,
+    "repeat_ratio": 1.104
+   },
+   "afrique_subsaharienne": {
+    "speakers": 25.0,
+    "clips": 100.0,
+    "wer": 0.115,
+    "wer_lo": 0.082,
+    "wer_hi": 0.15,
+    "wer_gap": 0.055,
+    "wer_gap_lo": 0.02,
+    "wer_gap_hi": 0.095,
+    "wer_gap_p": 0.006,
+    "repeat": 0.83,
+    "repeat_lo": 0.74,
+    "repeat_hi": 0.91,
+    "repeat_gap": 0.16,
+    "repeat_gap_lo": 0.03,
+    "repeat_gap_hi": 0.31,
+    "repeat_gap_p": 0.018,
+    "slip": 0.06,
+    "slip_gap": -0.04,
+    "slip_gap_lo": -0.13,
+    "slip_gap_hi": 0.04,
+    "slip_gap_p": 0.396,
+    "auc": 0.623,
+    "misheard": 0.53,
+    "conf": -0.218,
+    "conf_gap": -0.035,
+    "conf_gap_lo": -0.09,
+    "conf_gap_hi": 0.02,
+    "conf_gap_p": 0.232,
+    "repeat_ratio": 1.239
+   },
+   "cameroun_yaounde": {
+    "speakers": 15.0,
+    "clips": 60.0,
+    "wer": 0.117,
+    "wer_lo": 0.079,
+    "wer_hi": 0.159,
+    "wer_gap": 0.058,
+    "wer_gap_lo": 0.015,
+    "wer_gap_hi": 0.104,
+    "wer_gap_p": 0.006,
+    "repeat": 0.817,
+    "repeat_lo": 0.733,
+    "repeat_hi": 0.9,
+    "repeat_gap": 0.147,
+    "repeat_gap_lo": 0.007,
+    "repeat_gap_hi": 0.287,
+    "repeat_gap_p": 0.04,
+    "slip": 0.05,
+    "slip_gap": -0.05,
+    "slip_gap_lo": -0.13,
+    "slip_gap_hi": 0.03,
+    "slip_gap_p": 0.258,
+    "auc": 0.791,
+    "misheard": 0.467,
+    "conf": -0.23,
+    "conf_gap": -0.047,
+    "conf_gap_lo": -0.088,
+    "conf_gap_hi": -0.0,
+    "conf_gap_p": 0.05,
+    "repeat_ratio": 1.219
+   }
+  },
+  "clean_crossfit": {
+   "france": {
+    "speakers": 50.0,
+    "clips": 200.0,
+    "wer": 0.073,
+    "wer_lo": 0.055,
+    "wer_hi": 0.09,
+    "wer_gap": 0.0,
+    "wer_gap_lo": 0.0,
+    "wer_gap_hi": 0.0,
+    "wer_gap_p": null,
+    "repeat": 0.77,
+    "repeat_lo": 0.7,
+    "repeat_hi": 0.84,
+    "repeat_gap": 0.0,
+    "repeat_gap_lo": 0.0,
+    "repeat_gap_hi": 0.0,
+    "repeat_gap_p": null,
+    "slip": 0.07,
+    "slip_gap": 0.0,
+    "slip_gap_lo": 0.0,
+    "slip_gap_hi": 0.0,
+    "slip_gap_p": null,
+    "auc": 0.592,
+    "misheard": 0.375,
+    "conf": -0.197,
+    "conf_gap": 0.0,
+    "conf_gap_lo": 0.0,
+    "conf_gap_hi": 0.0,
+    "conf_gap_p": null,
+    "repeat_ratio": 1.0
+   },
+   "canada": {
+    "speakers": 50.0,
+    "clips": 200.0,
+    "wer": 0.123,
+    "wer_lo": 0.087,
+    "wer_hi": 0.165,
+    "wer_gap": 0.051,
+    "wer_gap_lo": 0.012,
+    "wer_gap_hi": 0.099,
+    "wer_gap_p": 0.006,
+    "repeat": 0.75,
+    "repeat_lo": 0.685,
+    "repeat_hi": 0.81,
+    "repeat_gap": -0.02,
+    "repeat_gap_lo": -0.12,
+    "repeat_gap_hi": 0.075,
+    "repeat_gap_p": 0.714,
+    "slip": 0.07,
+    "slip_gap": 0.0,
+    "slip_gap_lo": -0.05,
+    "slip_gap_hi": 0.055,
+    "slip_gap_p": 1.0,
+    "auc": 0.657,
+    "misheard": 0.44,
+    "conf": -0.201,
+    "conf_gap": -0.003,
+    "conf_gap_lo": -0.036,
+    "conf_gap_hi": 0.03,
+    "conf_gap_p": 0.812,
+    "repeat_ratio": 0.974
+   },
+   "afrique_subsaharienne": {
+    "speakers": 50.0,
+    "clips": 200.0,
+    "wer": 0.107,
+    "wer_lo": 0.084,
+    "wer_hi": 0.129,
+    "wer_gap": 0.034,
+    "wer_gap_lo": 0.005,
+    "wer_gap_hi": 0.065,
+    "wer_gap_p": 0.028,
+    "repeat": 0.845,
+    "repeat_lo": 0.78,
+    "repeat_hi": 0.9,
+    "repeat_gap": 0.075,
+    "repeat_gap_lo": -0.02,
+    "repeat_gap_hi": 0.165,
+    "repeat_gap_p": 0.126,
+    "slip": 0.045,
+    "slip_gap": -0.025,
+    "slip_gap_lo": -0.07,
+    "slip_gap_hi": 0.02,
+    "slip_gap_p": 0.356,
+    "auc": 0.671,
+    "misheard": 0.49,
+    "conf": -0.223,
+    "conf_gap": -0.026,
+    "conf_gap_lo": -0.065,
+    "conf_gap_hi": 0.012,
+    "conf_gap_p": 0.174,
+    "repeat_ratio": 1.097
+   },
+   "cameroun_yaounde": {
+    "speakers": 30.0,
+    "clips": 120.0,
+    "wer": 0.179,
+    "wer_lo": 0.134,
+    "wer_hi": 0.227,
+    "wer_gap": 0.106,
+    "wer_gap_lo": 0.06,
+    "wer_gap_hi": 0.155,
+    "wer_gap_p": 0.0,
+    "repeat": 0.85,
+    "repeat_lo": 0.783,
+    "repeat_hi": 0.908,
+    "repeat_gap": 0.08,
+    "repeat_gap_lo": -0.012,
+    "repeat_gap_hi": 0.173,
+    "repeat_gap_p": 0.084,
+    "slip": 0.05,
+    "slip_gap": -0.02,
+    "slip_gap_lo": -0.068,
+    "slip_gap_hi": 0.028,
+    "slip_gap_p": 0.502,
+    "auc": 0.788,
+    "misheard": 0.575,
+    "conf": -0.245,
+    "conf_gap": -0.047,
+    "conf_gap_lo": -0.084,
+    "conf_gap_hi": -0.01,
+    "conf_gap_p": 0.018,
+    "repeat_ratio": 1.104
+   }
+  },
+  "phone_test": {
+   "france": {
+    "speakers": 25.0,
+    "clips": 100.0,
+    "wer": 0.069,
+    "wer_lo": 0.043,
+    "wer_hi": 0.1,
+    "wer_gap": 0.0,
+    "wer_gap_lo": 0.0,
+    "wer_gap_hi": 0.0,
+    "wer_gap_p": null,
+    "repeat": 0.68,
+    "repeat_lo": 0.58,
+    "repeat_hi": 0.79,
+    "repeat_gap": 0.0,
+    "repeat_gap_lo": 0.0,
+    "repeat_gap_hi": 0.0,
+    "repeat_gap_p": null,
+    "slip": 0.08,
+    "slip_gap": 0.0,
+    "slip_gap_lo": 0.0,
+    "slip_gap_hi": 0.0,
+    "slip_gap_p": null,
+    "auc": 0.637,
+    "misheard": 0.37,
+    "conf": -0.194,
+    "conf_gap": 0.0,
+    "conf_gap_lo": 0.0,
+    "conf_gap_hi": 0.0,
+    "conf_gap_p": null,
+    "repeat_ratio": 1.0
+   },
+   "canada": {
+    "speakers": 25.0,
+    "clips": 100.0,
+    "wer": 0.137,
+    "wer_lo": 0.078,
+    "wer_hi": 0.213,
+    "wer_gap": 0.068,
+    "wer_gap_lo": 0.002,
+    "wer_gap_hi": 0.155,
+    "wer_gap_p": 0.042,
+    "repeat": 0.62,
+    "repeat_lo": 0.5,
+    "repeat_hi": 0.74,
+    "repeat_gap": -0.06,
+    "repeat_gap_lo": -0.21,
+    "repeat_gap_hi": 0.09,
+    "repeat_gap_p": 0.478,
+    "slip": 0.13,
+    "slip_gap": 0.05,
+    "slip_gap_lo": -0.04,
+    "slip_gap_hi": 0.14,
+    "slip_gap_p": 0.288,
+    "auc": 0.655,
+    "misheard": 0.47,
+    "conf": -0.206,
+    "conf_gap": -0.012,
+    "conf_gap_lo": -0.071,
+    "conf_gap_hi": 0.048,
+    "conf_gap_p": 0.7,
+    "repeat_ratio": 0.912
+   },
+   "afrique_subsaharienne": {
+    "speakers": 25.0,
+    "clips": 100.0,
+    "wer": 0.159,
+    "wer_lo": 0.109,
+    "wer_hi": 0.216,
+    "wer_gap": 0.09,
+    "wer_gap_lo": 0.036,
+    "wer_gap_hi": 0.144,
+    "wer_gap_p": 0.002,
+    "repeat": 0.83,
+    "repeat_lo": 0.74,
+    "repeat_hi": 0.91,
+    "repeat_gap": 0.15,
+    "repeat_gap_lo": -0.01,
+    "repeat_gap_hi": 0.29,
+    "repeat_gap_p": 0.062,
+    "slip": 0.06,
+    "slip_gap": -0.02,
+    "slip_gap_lo": -0.1,
+    "slip_gap_hi": 0.05,
+    "slip_gap_p": 0.744,
+    "auc": 0.742,
+    "misheard": 0.62,
+    "conf": -0.252,
+    "conf_gap": -0.057,
+    "conf_gap_lo": -0.126,
+    "conf_gap_hi": 0.009,
+    "conf_gap_p": 0.094,
+    "repeat_ratio": 1.221
+   },
+   "cameroun_yaounde": {
+    "speakers": 15.0,
+    "clips": 60.0,
+    "wer": 0.128,
+    "wer_lo": 0.086,
+    "wer_hi": 0.172,
+    "wer_gap": 0.059,
+    "wer_gap_lo": 0.007,
+    "wer_gap_hi": 0.112,
+    "wer_gap_p": 0.03,
+    "repeat": 0.85,
+    "repeat_lo": 0.767,
+    "repeat_hi": 0.917,
+    "repeat_gap": 0.17,
+    "repeat_gap_lo": 0.033,
+    "repeat_gap_hi": 0.29,
+    "repeat_gap_p": 0.014,
+    "slip": 0.017,
+    "slip_gap": -0.063,
+    "slip_gap_lo": -0.137,
+    "slip_gap_hi": -0.003,
+    "slip_gap_p": 0.046,
+    "auc": 0.822,
+    "misheard": 0.5,
+    "conf": -0.241,
+    "conf_gap": -0.046,
+    "conf_gap_lo": -0.093,
+    "conf_gap_hi": 0.008,
+    "conf_gap_p": 0.088,
+    "repeat_ratio": 1.25
+   }
+  },
+  "phone_crossfit": {
+   "france": {
+    "speakers": 50.0,
+    "clips": 200.0,
+    "wer": 0.079,
+    "wer_lo": 0.06,
+    "wer_hi": 0.101,
+    "wer_gap": 0.0,
+    "wer_gap_lo": 0.0,
+    "wer_gap_hi": 0.0,
+    "wer_gap_p": null,
+    "repeat": 0.77,
+    "repeat_lo": 0.695,
+    "repeat_hi": 0.835,
+    "repeat_gap": 0.0,
+    "repeat_gap_lo": 0.0,
+    "repeat_gap_hi": 0.0,
+    "repeat_gap_p": null,
+    "slip": 0.06,
+    "slip_gap": 0.0,
+    "slip_gap_lo": 0.0,
+    "slip_gap_hi": 0.0,
+    "slip_gap_p": null,
+    "auc": 0.622,
+    "misheard": 0.385,
+    "conf": -0.208,
+    "conf_gap": 0.0,
+    "conf_gap_lo": 0.0,
+    "conf_gap_hi": 0.0,
+    "conf_gap_p": null,
+    "repeat_ratio": 1.0
+   },
+   "canada": {
+    "speakers": 50.0,
+    "clips": 200.0,
+    "wer": 0.136,
+    "wer_lo": 0.102,
+    "wer_hi": 0.18,
+    "wer_gap": 0.057,
+    "wer_gap_lo": 0.017,
+    "wer_gap_hi": 0.102,
+    "wer_gap_p": 0.01,
+    "repeat": 0.705,
+    "repeat_lo": 0.63,
+    "repeat_hi": 0.775,
+    "repeat_gap": -0.065,
+    "repeat_gap_lo": -0.165,
+    "repeat_gap_hi": 0.025,
+    "repeat_gap_p": 0.192,
+    "slip": 0.095,
+    "slip_gap": 0.035,
+    "slip_gap_lo": -0.02,
+    "slip_gap_hi": 0.09,
+    "slip_gap_p": 0.224,
+    "auc": 0.664,
+    "misheard": 0.47,
+    "conf": -0.206,
+    "conf_gap": 0.002,
+    "conf_gap_lo": -0.033,
+    "conf_gap_hi": 0.04,
+    "conf_gap_p": 0.96,
+    "repeat_ratio": 0.916
+   },
+   "afrique_subsaharienne": {
+    "speakers": 50.0,
+    "clips": 200.0,
+    "wer": 0.146,
+    "wer_lo": 0.115,
+    "wer_hi": 0.182,
+    "wer_gap": 0.067,
+    "wer_gap_lo": 0.028,
+    "wer_gap_hi": 0.106,
+    "wer_gap_p": 0.002,
+    "repeat": 0.87,
+    "repeat_lo": 0.8,
+    "repeat_hi": 0.93,
+    "repeat_gap": 0.1,
+    "repeat_gap_lo": 0.0,
+    "repeat_gap_hi": 0.19,
+    "repeat_gap_p": 0.052,
+    "slip": 0.045,
+    "slip_gap": -0.015,
+    "slip_gap_lo": -0.06,
+    "slip_gap_hi": 0.03,
+    "slip_gap_p": 0.624,
+    "auc": 0.718,
+    "misheard": 0.57,
+    "conf": -0.248,
+    "conf_gap": -0.041,
+    "conf_gap_lo": -0.083,
+    "conf_gap_hi": 0.001,
+    "conf_gap_p": 0.056,
+    "repeat_ratio": 1.13
+   },
+   "cameroun_yaounde": {
+    "speakers": 30.0,
+    "clips": 120.0,
+    "wer": 0.188,
+    "wer_lo": 0.141,
+    "wer_hi": 0.236,
+    "wer_gap": 0.108,
+    "wer_gap_lo": 0.06,
+    "wer_gap_hi": 0.164,
+    "wer_gap_p": 0.0,
+    "repeat": 0.892,
+    "repeat_lo": 0.833,
+    "repeat_hi": 0.95,
+    "repeat_gap": 0.122,
+    "repeat_gap_lo": 0.037,
+    "repeat_gap_hi": 0.208,
+    "repeat_gap_p": 0.008,
+    "slip": 0.008,
+    "slip_gap": -0.052,
+    "slip_gap_lo": -0.092,
+    "slip_gap_hi": -0.013,
+    "slip_gap_p": 0.0,
+    "auc": 0.801,
+    "misheard": 0.583,
+    "conf": -0.256,
+    "conf_gap": -0.048,
+    "conf_gap_lo": -0.085,
+    "conf_gap_hi": -0.012,
+    "conf_gap_p": 0.006,
+    "repeat_ratio": 1.158
+   }
+  }
+ },
+ "slider": {
+  "phone": [
+   {
+    "target": 0.01,
+    "threshold": -0.059,
+    "groups": {
+     "france": {
+      "repeat": 0.95,
+      "slip": 0.02
+     },
+     "canada": {
+      "repeat": 0.95,
+      "slip": 0.03
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.98,
+      "slip": 0.01
+     },
+     "cameroun_yaounde": {
+      "repeat": 1.0,
+      "slip": 0.0
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.967,
+     "slip": 0.017,
+     "random_slip": 0.016,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.02,
+    "threshold": -0.074,
+    "groups": {
+     "france": {
+      "repeat": 0.87,
+      "slip": 0.05
+     },
+     "canada": {
+      "repeat": 0.89,
+      "slip": 0.05
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.95,
+      "slip": 0.03
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.983,
+      "slip": 0.0
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.917,
+     "slip": 0.036,
+     "random_slip": 0.041,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.03,
+    "threshold": -0.096,
+    "groups": {
+     "france": {
+      "repeat": 0.76,
+      "slip": 0.06
+     },
+     "canada": {
+      "repeat": 0.8,
+      "slip": 0.07
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.93,
+      "slip": 0.03
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.9,
+      "slip": 0.0
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.842,
+     "slip": 0.044,
+     "random_slip": 0.077,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.04,
+    "threshold": -0.113,
+    "groups": {
+     "france": {
+      "repeat": 0.7,
+      "slip": 0.08
+     },
+     "canada": {
+      "repeat": 0.66,
+      "slip": 0.11
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.84,
+      "slip": 0.06
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.867,
+      "slip": 0.017
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.756,
+     "slip": 0.072,
+     "random_slip": 0.119,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.05,
+    "threshold": -0.116,
+    "groups": {
+     "france": {
+      "repeat": 0.68,
+      "slip": 0.08
+     },
+     "canada": {
+      "repeat": 0.62,
+      "slip": 0.13
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.83,
+      "slip": 0.06
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.85,
+      "slip": 0.017
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.733,
+     "slip": 0.078,
+     "random_slip": 0.13,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.06,
+    "threshold": -0.118,
+    "groups": {
+     "france": {
+      "repeat": 0.68,
+      "slip": 0.08
+     },
+     "canada": {
+      "repeat": 0.61,
+      "slip": 0.13
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.81,
+      "slip": 0.07
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.85,
+      "slip": 0.017
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.725,
+     "slip": 0.081,
+     "random_slip": 0.134,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.07,
+    "threshold": -0.126,
+    "groups": {
+     "france": {
+      "repeat": 0.65,
+      "slip": 0.1
+     },
+     "canada": {
+      "repeat": 0.57,
+      "slip": 0.15
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.78,
+      "slip": 0.1
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.817,
+      "slip": 0.033
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.692,
+     "slip": 0.103,
+     "random_slip": 0.151,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.08,
+    "threshold": -0.13,
+    "groups": {
+     "france": {
+      "repeat": 0.64,
+      "slip": 0.1
+     },
+     "canada": {
+      "repeat": 0.52,
+      "slip": 0.16
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.77,
+      "slip": 0.1
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.8,
+      "slip": 0.05
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.669,
+     "slip": 0.108,
+     "random_slip": 0.162,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.09,
+    "threshold": -0.132,
+    "groups": {
+     "france": {
+      "repeat": 0.63,
+      "slip": 0.1
+     },
+     "canada": {
+      "repeat": 0.51,
+      "slip": 0.16
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.76,
+      "slip": 0.11
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.767,
+      "slip": 0.05
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.656,
+     "slip": 0.111,
+     "random_slip": 0.168,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.1,
+    "threshold": -0.141,
+    "groups": {
+     "france": {
+      "repeat": 0.58,
+      "slip": 0.1
+     },
+     "canada": {
+      "repeat": 0.5,
+      "slip": 0.17
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.75,
+      "slip": 0.11
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.717,
+      "slip": 0.067
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.628,
+     "slip": 0.117,
+     "random_slip": 0.182,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.11,
+    "threshold": -0.145,
+    "groups": {
+     "france": {
+      "repeat": 0.57,
+      "slip": 0.11
+     },
+     "canada": {
+      "repeat": 0.49,
+      "slip": 0.17
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.71,
+      "slip": 0.12
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.7,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.608,
+     "slip": 0.125,
+     "random_slip": 0.192,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.12,
+    "threshold": -0.162,
+    "groups": {
+     "france": {
+      "repeat": 0.47,
+      "slip": 0.14
+     },
+     "canada": {
+      "repeat": 0.44,
+      "slip": 0.19
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.57,
+      "slip": 0.18
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.583,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.508,
+     "slip": 0.156,
+     "random_slip": 0.24,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.13,
+    "threshold": -0.17,
+    "groups": {
+     "france": {
+      "repeat": 0.46,
+      "slip": 0.14
+     },
+     "canada": {
+      "repeat": 0.42,
+      "slip": 0.2
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.54,
+      "slip": 0.2
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.583,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.492,
+     "slip": 0.164,
+     "random_slip": 0.248,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.14,
+    "threshold": -0.176,
+    "groups": {
+     "france": {
+      "repeat": 0.43,
+      "slip": 0.15
+     },
+     "canada": {
+      "repeat": 0.41,
+      "slip": 0.2
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.52,
+      "slip": 0.21
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.55,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.469,
+     "slip": 0.172,
+     "random_slip": 0.259,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.15,
+    "threshold": -0.182,
+    "groups": {
+     "france": {
+      "repeat": 0.4,
+      "slip": 0.17
+     },
+     "canada": {
+      "repeat": 0.41,
+      "slip": 0.2
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.51,
+      "slip": 0.22
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.55,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.458,
+     "slip": 0.181,
+     "random_slip": 0.265,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.16,
+    "threshold": -0.186,
+    "groups": {
+     "france": {
+      "repeat": 0.37,
+      "slip": 0.17
+     },
+     "canada": {
+      "repeat": 0.4,
+      "slip": 0.2
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.49,
+      "slip": 0.23
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.517,
+      "slip": 0.117
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.436,
+     "slip": 0.186,
+     "random_slip": 0.276,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.17,
+    "threshold": -0.19,
+    "groups": {
+     "france": {
+      "repeat": 0.37,
+      "slip": 0.17
+     },
+     "canada": {
+      "repeat": 0.38,
+      "slip": 0.21
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.49,
+      "slip": 0.23
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.467,
+      "slip": 0.133
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.422,
+     "slip": 0.192,
+     "random_slip": 0.282,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.18,
+    "threshold": -0.195,
+    "groups": {
+     "france": {
+      "repeat": 0.35,
+      "slip": 0.18
+     },
+     "canada": {
+      "repeat": 0.36,
+      "slip": 0.23
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.47,
+      "slip": 0.25
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.45,
+      "slip": 0.133
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.403,
+     "slip": 0.206,
+     "random_slip": 0.292,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.19,
+    "threshold": -0.201,
+    "groups": {
+     "france": {
+      "repeat": 0.33,
+      "slip": 0.19
+     },
+     "canada": {
+      "repeat": 0.34,
+      "slip": 0.24
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.43,
+      "slip": 0.27
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.45,
+      "slip": 0.133
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.381,
+     "slip": 0.217,
+     "random_slip": 0.303,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.2,
+    "threshold": -0.206,
+    "groups": {
+     "france": {
+      "repeat": 0.31,
+      "slip": 0.21
+     },
+     "canada": {
+      "repeat": 0.3,
+      "slip": 0.27
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.42,
+      "slip": 0.27
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.45,
+      "slip": 0.133
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.361,
+     "slip": 0.231,
+     "random_slip": 0.312,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.21,
+    "threshold": -0.208,
+    "groups": {
+     "france": {
+      "repeat": 0.3,
+      "slip": 0.22
+     },
+     "canada": {
+      "repeat": 0.3,
+      "slip": 0.27
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.42,
+      "slip": 0.27
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.45,
+      "slip": 0.133
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.358,
+     "slip": 0.233,
+     "random_slip": 0.314,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.22,
+    "threshold": -0.216,
+    "groups": {
+     "france": {
+      "repeat": 0.28,
+      "slip": 0.23
+     },
+     "canada": {
+      "repeat": 0.28,
+      "slip": 0.29
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.42,
+      "slip": 0.27
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.45,
+      "slip": 0.133
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.347,
+     "slip": 0.242,
+     "random_slip": 0.319,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.23,
+    "threshold": -0.22,
+    "groups": {
+     "france": {
+      "repeat": 0.26,
+      "slip": 0.23
+     },
+     "canada": {
+      "repeat": 0.27,
+      "slip": 0.29
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.4,
+      "slip": 0.28
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.417,
+      "slip": 0.167
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.328,
+     "slip": 0.25,
+     "random_slip": 0.329,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.24,
+    "threshold": -0.229,
+    "groups": {
+     "france": {
+      "repeat": 0.23,
+      "slip": 0.25
+     },
+     "canada": {
+      "repeat": 0.27,
+      "slip": 0.29
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.39,
+      "slip": 0.28
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.417,
+      "slip": 0.167
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.317,
+     "slip": 0.256,
+     "random_slip": 0.334,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.25,
+    "threshold": -0.241,
+    "groups": {
+     "france": {
+      "repeat": 0.19,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.25,
+      "slip": 0.3
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.37,
+      "slip": 0.3
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.383,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.289,
+     "slip": 0.275,
+     "random_slip": 0.348,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.26,
+    "threshold": -0.246,
+    "groups": {
+     "france": {
+      "repeat": 0.19,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.24,
+      "slip": 0.31
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.37,
+      "slip": 0.3
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.367,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.283,
+     "slip": 0.278,
+     "random_slip": 0.35,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.27,
+    "threshold": -0.248,
+    "groups": {
+     "france": {
+      "repeat": 0.19,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.24,
+      "slip": 0.31
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.37,
+      "slip": 0.3
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.367,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.283,
+     "slip": 0.278,
+     "random_slip": 0.35,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.28,
+    "threshold": -0.254,
+    "groups": {
+     "france": {
+      "repeat": 0.18,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.23,
+      "slip": 0.31
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.33,
+      "slip": 0.32
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.333,
+      "slip": 0.217
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.261,
+     "slip": 0.286,
+     "random_slip": 0.361,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.29,
+    "threshold": -0.261,
+    "groups": {
+     "france": {
+      "repeat": 0.16,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.22,
+      "slip": 0.32
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.3,
+      "slip": 0.34
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.317,
+      "slip": 0.217
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.242,
+     "slip": 0.294,
+     "random_slip": 0.371,
+     "never_slip": 0.489
+    }
+   },
+   {
+    "target": 0.3,
+    "threshold": -0.268,
+    "groups": {
+     "france": {
+      "repeat": 0.15,
+      "slip": 0.28
+     },
+     "canada": {
+      "repeat": 0.22,
+      "slip": 0.32
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.29,
+      "slip": 0.34
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.317,
+      "slip": 0.217
+     }
+    },
+    "baseline_never": {
+     "france": 0.37,
+     "canada": 0.47,
+     "afrique_subsaharienne": 0.62,
+     "cameroun_yaounde": 0.5
+    },
+    "pooled": {
+     "repeat": 0.236,
+     "slip": 0.297,
+     "random_slip": 0.373,
+     "never_slip": 0.489
+    }
+   }
+  ],
+  "clean": [
+   {
+    "target": 0.01,
+    "threshold": -0.069,
+    "groups": {
+     "france": {
+      "repeat": 0.92,
+      "slip": 0.03
+     },
+     "canada": {
+      "repeat": 0.94,
+      "slip": 0.03
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.94,
+      "slip": 0.01
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.967,
+      "slip": 0.0
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.939,
+     "slip": 0.019,
+     "random_slip": 0.027,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.02,
+    "threshold": -0.079,
+    "groups": {
+     "france": {
+      "repeat": 0.87,
+      "slip": 0.05
+     },
+     "canada": {
+      "repeat": 0.91,
+      "slip": 0.03
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.91,
+      "slip": 0.01
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.95,
+      "slip": 0.0
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.906,
+     "slip": 0.025,
+     "random_slip": 0.042,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.03,
+    "threshold": -0.081,
+    "groups": {
+     "france": {
+      "repeat": 0.86,
+      "slip": 0.05
+     },
+     "canada": {
+      "repeat": 0.9,
+      "slip": 0.03
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.9,
+      "slip": 0.02
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.95,
+      "slip": 0.0
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.897,
+     "slip": 0.028,
+     "random_slip": 0.045,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.04,
+    "threshold": -0.093,
+    "groups": {
+     "france": {
+      "repeat": 0.8,
+      "slip": 0.06
+     },
+     "canada": {
+      "repeat": 0.81,
+      "slip": 0.05
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.9,
+      "slip": 0.02
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.917,
+      "slip": 0.017
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.85,
+     "slip": 0.039,
+     "random_slip": 0.066,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.05,
+    "threshold": -0.115,
+    "groups": {
+     "france": {
+      "repeat": 0.67,
+      "slip": 0.1
+     },
+     "canada": {
+      "repeat": 0.74,
+      "slip": 0.07
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.83,
+      "slip": 0.06
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.817,
+      "slip": 0.05
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.758,
+     "slip": 0.072,
+     "random_slip": 0.107,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.06,
+    "threshold": -0.121,
+    "groups": {
+     "france": {
+      "repeat": 0.64,
+      "slip": 0.11
+     },
+     "canada": {
+      "repeat": 0.67,
+      "slip": 0.09
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.79,
+      "slip": 0.08
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.8,
+      "slip": 0.05
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.717,
+     "slip": 0.086,
+     "random_slip": 0.125,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.07,
+    "threshold": -0.127,
+    "groups": {
+     "france": {
+      "repeat": 0.61,
+      "slip": 0.13
+     },
+     "canada": {
+      "repeat": 0.64,
+      "slip": 0.09
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.76,
+      "slip": 0.1
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.783,
+      "slip": 0.05
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.689,
+     "slip": 0.097,
+     "random_slip": 0.137,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.08,
+    "threshold": -0.14,
+    "groups": {
+     "france": {
+      "repeat": 0.57,
+      "slip": 0.13
+     },
+     "canada": {
+      "repeat": 0.56,
+      "slip": 0.12
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.68,
+      "slip": 0.13
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.717,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.622,
+     "slip": 0.119,
+     "random_slip": 0.167,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.09,
+    "threshold": -0.143,
+    "groups": {
+     "france": {
+      "repeat": 0.57,
+      "slip": 0.13
+     },
+     "canada": {
+      "repeat": 0.52,
+      "slip": 0.13
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.68,
+      "slip": 0.13
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.717,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.611,
+     "slip": 0.122,
+     "random_slip": 0.172,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.1,
+    "threshold": -0.145,
+    "groups": {
+     "france": {
+      "repeat": 0.57,
+      "slip": 0.13
+     },
+     "canada": {
+      "repeat": 0.52,
+      "slip": 0.13
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.67,
+      "slip": 0.13
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.717,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.608,
+     "slip": 0.122,
+     "random_slip": 0.173,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.11,
+    "threshold": -0.153,
+    "groups": {
+     "france": {
+      "repeat": 0.55,
+      "slip": 0.14
+     },
+     "canada": {
+      "repeat": 0.5,
+      "slip": 0.14
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.64,
+      "slip": 0.14
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.65,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.578,
+     "slip": 0.131,
+     "random_slip": 0.186,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.12,
+    "threshold": -0.158,
+    "groups": {
+     "france": {
+      "repeat": 0.54,
+      "slip": 0.15
+     },
+     "canada": {
+      "repeat": 0.49,
+      "slip": 0.15
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.61,
+      "slip": 0.16
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.6,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.556,
+     "slip": 0.142,
+     "random_slip": 0.196,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.13,
+    "threshold": -0.161,
+    "groups": {
+     "france": {
+      "repeat": 0.52,
+      "slip": 0.15
+     },
+     "canada": {
+      "repeat": 0.49,
+      "slip": 0.15
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.59,
+      "slip": 0.17
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.583,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.542,
+     "slip": 0.144,
+     "random_slip": 0.202,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.14,
+    "threshold": -0.168,
+    "groups": {
+     "france": {
+      "repeat": 0.48,
+      "slip": 0.18
+     },
+     "canada": {
+      "repeat": 0.47,
+      "slip": 0.15
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.55,
+      "slip": 0.21
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.567,
+      "slip": 0.083
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.511,
+     "slip": 0.164,
+     "random_slip": 0.216,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.15,
+    "threshold": -0.172,
+    "groups": {
+     "france": {
+      "repeat": 0.46,
+      "slip": 0.19
+     },
+     "canada": {
+      "repeat": 0.44,
+      "slip": 0.17
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.53,
+      "slip": 0.22
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.55,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.489,
+     "slip": 0.178,
+     "random_slip": 0.226,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.16,
+    "threshold": -0.176,
+    "groups": {
+     "france": {
+      "repeat": 0.46,
+      "slip": 0.19
+     },
+     "canada": {
+      "repeat": 0.42,
+      "slip": 0.18
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.49,
+      "slip": 0.23
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.533,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.469,
+     "slip": 0.183,
+     "random_slip": 0.234,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.17,
+    "threshold": -0.178,
+    "groups": {
+     "france": {
+      "repeat": 0.45,
+      "slip": 0.19
+     },
+     "canada": {
+      "repeat": 0.41,
+      "slip": 0.18
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.47,
+      "slip": 0.24
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.517,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.456,
+     "slip": 0.186,
+     "random_slip": 0.24,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.18,
+    "threshold": -0.183,
+    "groups": {
+     "france": {
+      "repeat": 0.41,
+      "slip": 0.21
+     },
+     "canada": {
+      "repeat": 0.38,
+      "slip": 0.19
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.47,
+      "slip": 0.24
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.5,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.433,
+     "slip": 0.194,
+     "random_slip": 0.25,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.19,
+    "threshold": -0.189,
+    "groups": {
+     "france": {
+      "repeat": 0.37,
+      "slip": 0.22
+     },
+     "canada": {
+      "repeat": 0.36,
+      "slip": 0.19
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.44,
+      "slip": 0.24
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.5,
+      "slip": 0.1
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.408,
+     "slip": 0.197,
+     "random_slip": 0.261,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.2,
+    "threshold": -0.195,
+    "groups": {
+     "france": {
+      "repeat": 0.34,
+      "slip": 0.23
+     },
+     "canada": {
+      "repeat": 0.36,
+      "slip": 0.19
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.44,
+      "slip": 0.24
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.467,
+      "slip": 0.117
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.394,
+     "slip": 0.203,
+     "random_slip": 0.268,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.21,
+    "threshold": -0.207,
+    "groups": {
+     "france": {
+      "repeat": 0.3,
+      "slip": 0.23
+     },
+     "canada": {
+      "repeat": 0.33,
+      "slip": 0.22
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.43,
+      "slip": 0.24
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.417,
+      "slip": 0.15
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.364,
+     "slip": 0.217,
+     "random_slip": 0.281,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.22,
+    "threshold": -0.213,
+    "groups": {
+     "france": {
+      "repeat": 0.29,
+      "slip": 0.23
+     },
+     "canada": {
+      "repeat": 0.31,
+      "slip": 0.22
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.39,
+      "slip": 0.26
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.417,
+      "slip": 0.15
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.344,
+     "slip": 0.222,
+     "random_slip": 0.289,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.23,
+    "threshold": -0.22,
+    "groups": {
+     "france": {
+      "repeat": 0.26,
+      "slip": 0.24
+     },
+     "canada": {
+      "repeat": 0.28,
+      "slip": 0.23
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.34,
+      "slip": 0.3
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.4,
+      "slip": 0.167
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.311,
+     "slip": 0.242,
+     "random_slip": 0.304,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.24,
+    "threshold": -0.228,
+    "groups": {
+     "france": {
+      "repeat": 0.25,
+      "slip": 0.24
+     },
+     "canada": {
+      "repeat": 0.27,
+      "slip": 0.24
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.33,
+      "slip": 0.31
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.333,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.292,
+     "slip": 0.253,
+     "random_slip": 0.313,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.25,
+    "threshold": -0.232,
+    "groups": {
+     "france": {
+      "repeat": 0.24,
+      "slip": 0.25
+     },
+     "canada": {
+      "repeat": 0.26,
+      "slip": 0.25
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.32,
+      "slip": 0.32
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.333,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.283,
+     "slip": 0.261,
+     "random_slip": 0.317,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.26,
+    "threshold": -0.236,
+    "groups": {
+     "france": {
+      "repeat": 0.21,
+      "slip": 0.26
+     },
+     "canada": {
+      "repeat": 0.26,
+      "slip": 0.25
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.3,
+      "slip": 0.33
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.317,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.267,
+     "slip": 0.267,
+     "random_slip": 0.324,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.27,
+    "threshold": -0.243,
+    "groups": {
+     "france": {
+      "repeat": 0.2,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.25,
+      "slip": 0.26
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.29,
+      "slip": 0.34
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.317,
+      "slip": 0.2
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.258,
+     "slip": 0.275,
+     "random_slip": 0.328,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.28,
+    "threshold": -0.254,
+    "groups": {
+     "france": {
+      "repeat": 0.19,
+      "slip": 0.27
+     },
+     "canada": {
+      "repeat": 0.24,
+      "slip": 0.26
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.26,
+      "slip": 0.36
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.283,
+      "slip": 0.233
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.239,
+     "slip": 0.286,
+     "random_slip": 0.336,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.29,
+    "threshold": -0.26,
+    "groups": {
+     "france": {
+      "repeat": 0.18,
+      "slip": 0.28
+     },
+     "canada": {
+      "repeat": 0.23,
+      "slip": 0.27
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.26,
+      "slip": 0.36
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.25,
+      "slip": 0.267
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.228,
+     "slip": 0.297,
+     "random_slip": 0.341,
+     "never_slip": 0.442
+    }
+   },
+   {
+    "target": 0.3,
+    "threshold": -0.266,
+    "groups": {
+     "france": {
+      "repeat": 0.16,
+      "slip": 0.3
+     },
+     "canada": {
+      "repeat": 0.23,
+      "slip": 0.27
+     },
+     "afrique_subsaharienne": {
+      "repeat": 0.25,
+      "slip": 0.37
+     },
+     "cameroun_yaounde": {
+      "repeat": 0.233,
+      "slip": 0.267
+     }
+    },
+    "baseline_never": {
+     "france": 0.38,
+     "canada": 0.4,
+     "afrique_subsaharienne": 0.53,
+     "cameroun_yaounde": 0.467
+    },
+    "pooled": {
+     "repeat": 0.217,
+     "slip": 0.306,
+     "random_slip": 0.346,
+     "never_slip": 0.442
+    }
+   }
+  ]
+ },
+ "robustness": {
+  "clean": {
+   "france": {
+    "snr_db": 50.483,
+    "wer": 0.073,
+    "wer_no_name": 0.052,
+    "clips_no_name": 134,
+    "wer_good_mic": 0.074,
+    "clips_good_mic": 125,
+    "misheard": 0.375,
+    "misheard_fr_length": 0.375,
+    "mean_words": 9.375
+   },
+   "canada": {
+    "snr_db": 49.302,
+    "wer": 0.123,
+    "wer_no_name": 0.111,
+    "clips_no_name": 126,
+    "wer_good_mic": 0.107,
+    "clips_good_mic": 106,
+    "misheard": 0.44,
+    "misheard_fr_length": 0.424,
+    "mean_words": 9.825
+   },
+   "afrique_subsaharienne": {
+    "snr_db": 49.283,
+    "wer": 0.107,
+    "wer_no_name": 0.091,
+    "clips_no_name": 134,
+    "wer_good_mic": 0.094,
+    "clips_good_mic": 110,
+    "misheard": 0.49,
+    "misheard_fr_length": 0.481,
+    "mean_words": 10.155
+   },
+   "cameroun_yaounde": {
+    "snr_db": 43.453,
+    "wer": 0.179,
+    "wer_no_name": 0.179,
+    "clips_no_name": 120,
+    "wer_good_mic": 0.207,
+    "clips_good_mic": 19,
+    "misheard": 0.575,
+    "misheard_fr_length": 0.527,
+    "mean_words": 8.917
+   }
+  },
+  "phone": {
+   "france": {
+    "snr_db": 50.953,
+    "wer": 0.079,
+    "wer_no_name": 0.06,
+    "clips_no_name": 134,
+    "wer_good_mic": 0.075,
+    "clips_good_mic": 115,
+    "misheard": 0.385,
+    "misheard_fr_length": 0.385,
+    "mean_words": 9.375
+   },
+   "canada": {
+    "snr_db": 49.42,
+    "wer": 0.136,
+    "wer_no_name": 0.117,
+    "clips_no_name": 126,
+    "wer_good_mic": 0.119,
+    "clips_good_mic": 103,
+    "misheard": 0.47,
+    "misheard_fr_length": 0.459,
+    "mean_words": 9.825
+   },
+   "afrique_subsaharienne": {
+    "snr_db": 49.152,
+    "wer": 0.146,
+    "wer_no_name": 0.137,
+    "clips_no_name": 134,
+    "wer_good_mic": 0.129,
+    "clips_good_mic": 100,
+    "misheard": 0.57,
+    "misheard_fr_length": 0.577,
+    "mean_words": 10.155
+   },
+   "cameroun_yaounde": {
+    "snr_db": 47.165,
+    "wer": 0.188,
+    "wer_no_name": 0.188,
+    "clips_no_name": 120,
+    "wer_good_mic": 0.237,
+    "clips_good_mic": 42,
+    "misheard": 0.583,
+    "misheard_fr_length": 0.54,
+    "mean_words": 8.917
+   }
+  }
+ },
+ "phone_increase": {
+  "france": 0.007,
+  "canada": 0.013,
+  "afrique_subsaharienne": 0.039,
+  "cameroun_yaounde": 0.009
+ },
+ "phone_widening": {
+  "canada": {
+   "gap": 0.006,
+   "lo": -0.01,
+   "hi": 0.021,
+   "p": 0.434
+  },
+  "afrique_subsaharienne": {
+   "gap": 0.032,
+   "lo": 0.012,
+   "hi": 0.053,
+   "p": 0.002
+  },
+  "cameroun_yaounde": {
+   "gap": 0.002,
+   "lo": -0.013,
+   "hi": 0.017,
+   "p": 0.756
+  }
+ },
+ "language_hint": {
+  "france": {
+   "group": "france",
+   "clips": 100.0,
+   "wrong_language": 2.0,
+   "languages": "{'French': 98, 'English': 1, 'Portuguese': 1}",
+   "wer_no_hint": 0.068,
+   "wer_fr_hint": 0.069,
+   "gain": -0.001,
+   "gain_lo": -0.004,
+   "gain_hi": 0.0,
+   "gain_p": 0.708,
+   "gap_no_hint": null,
+   "gap_fr_hint": null,
+   "narrowing": null,
+   "narrowing_lo": null,
+   "narrowing_hi": null,
+   "narrowing_p": null
+  },
+  "canada": {
+   "group": "canada",
+   "clips": 100.0,
+   "wrong_language": 7.0,
+   "languages": "{'French': 93, 'English': 6, 'Georgian': 1}",
+   "wer_no_hint": 0.165,
+   "wer_fr_hint": 0.137,
+   "gain": 0.028,
+   "gain_lo": 0.001,
+   "gain_hi": 0.062,
+   "gain_p": 0.024,
+   "gap_no_hint": 0.097,
+   "gap_fr_hint": 0.068,
+   "narrowing": 0.029,
+   "narrowing_lo": 0.002,
+   "narrowing_hi": 0.067,
+   "narrowing_p": 0.012
+  },
+  "afrique_subsaharienne": {
+   "group": "afrique_subsaharienne",
+   "clips": 100.0,
+   "wrong_language": 9.0,
+   "languages": "{'Italian': 1, 'French': 91, 'English': 5, 'Haitian': 1, 'Korean': 2}",
+   "wer_no_hint": 0.171,
+   "wer_fr_hint": 0.159,
+   "gain": 0.012,
+   "gain_lo": 0.0,
+   "gain_hi": 0.035,
+   "gain_p": 0.09,
+   "gap_no_hint": 0.103,
+   "gap_fr_hint": 0.09,
+   "narrowing": 0.013,
+   "narrowing_lo": 0.0,
+   "narrowing_hi": 0.033,
+   "narrowing_p": 0.058
+  }
+ }
+}

@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Pays for the Correction?</title>
+<meta name="description" content="An AI phone agent asks callers to repeat when it is unsure. Does the same rule cost every French accent the same? Measured on Whisper with Common Voice and Yaoundé recordings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f3f5f8; --surface: #ffffff; --ink: #10161f; --ink-2: #4a5361; --ink-3: #6b7482; --line: #dde2e9; --grid: #e9edf2;
+  --hero: #0f1720; --hero-ink: #f2f4f7; --hero-ink-2: #aab3c0;
+  --s-france: #2a78d6; --s-canada: #1baf7a; --s-afrique_subsaharienne: #eb6834; --s-cameroun_yaounde: #6250d6;
+  --focus: #2a78d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #121417; --surface: #1a1d21; --ink: #eef1f4; --ink-2: #b9c0ca; --ink-3: #8d96a3; --line: #2c3138; --grid: #24282e;
+    --hero: #0a0e13; --hero-ink: #f2f4f7; --hero-ink-2: #9aa4b2;
+    --s-france: #3987e5; --s-canada: #199e70; --s-afrique_subsaharienne: #d95926; --s-cameroun_yaounde: #9085e9;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #121417; --surface: #1a1d21; --ink: #eef1f4; --ink-2: #b9c0ca; --ink-3: #8d96a3; --line: #2c3138; --grid: #24282e;
+  --hero: #0a0e13; --hero-ink: #f2f4f7; --hero-ink-2: #9aa4b2;
+  --s-france: #3987e5; --s-canada: #199e70; --s-afrique_subsaharienne: #d95926; --s-cameroun_yaounde: #9085e9;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 18px/1.6 "Source Sans 3", system-ui, sans-serif; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: #eb683444; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+header.hero { background: var(--hero); color: var(--hero-ink); padding: 72px 0 64px; }
+.kicker { color: var(--hero-ink-2); font-size: 15px; letter-spacing: .02em; margin: 0 0 20px; }
+h1 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: clamp(44px, 9vw, 88px); line-height: .98; letter-spacing: -.03em; margin: 0 0 28px; text-wrap: balance; }
+.lede { font-size: clamp(20px, 2.6vw, 24px); line-height: 1.45; margin: 0 0 24px; max-width: 34em; }
+.byline { color: var(--hero-ink-2); font-size: 16px; margin: 0; }
+
+section { padding: 56px 0 8px; }
+h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: clamp(28px, 4.4vw, 40px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 18px; text-wrap: balance; }
+h3 { font-size: 18px; margin: 28px 0 8px; }
+p { margin: 0 0 16px; }
+.muted { color: var(--ink-2); }
+.small { font-size: 15px; color: var(--ink-3); }
+.finding { font-size: 14px; font-weight: 700; color: var(--ink-3); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 10px; }
+
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 8px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.tile b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 40px; line-height: 1; letter-spacing: -.02em; margin-bottom: 10px; }
+.tile span { font-size: 15px; color: var(--ink-2); line-height: 1.4; display: block; }
+
+.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 8px; margin: 24px 0; }
+.flow .step { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-size: 15px; line-height: 1.4; }
+.flow .step b { display: block; font-size: 16px; margin-bottom: 4px; }
+.flow .arrow { align-self: center; color: var(--ink-3); font-size: 22px; }
+.flow .split { display: grid; gap: 8px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin: 20px 0 12px; position: relative; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.card-title { font-weight: 700; font-size: 16px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: 15px; padding: 6px 14px; border: 0; background: transparent; color: var(--ink-2); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+svg text { fill: var(--ink); font-family: "Source Sans 3", system-ui, sans-serif; }
+svg .lab { font-size: 15px; } svg .val { font-size: 14px; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+svg .axis { font-size: 12px; fill: var(--ink-3); }
+svg .gridline { stroke: var(--grid); stroke-width: 1; }
+svg .whisk { stroke: var(--ink); stroke-width: 1.5; opacity: .55; }
+svg .hit { fill: transparent; cursor: default; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink-2); margin-top: 10px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; }
+.legend i.ring { background: transparent !important; border: 2px solid var(--ink-3); border-radius: 50%; }
+.legend i.dot { background: var(--ink-3); border-radius: 50%; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--surface); font-size: 14px; line-height: 1.4; padding: 8px 10px; border-radius: 8px; max-width: 260px; opacity: 0; transform: translateY(4px); transition: opacity .12s cubic-bezier(.16,1,.3,1), transform .12s cubic-bezier(.16,1,.3,1); z-index: 2; }
+.tip.on { opacity: 1; transform: none; }
+details { margin-top: 12px; font-size: 15px; }
+summary { cursor: pointer; color: var(--ink-2); }
+table { border-collapse: collapse; width: 100%; margin-top: 10px; font-variant-numeric: tabular-nums; font-size: 15px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+th { color: var(--ink-3); font-weight: 600; }
+.tablewrap { overflow-x: auto; }
+
+.slider { margin: 6px 0 18px; }
+.slider label { display: flex; justify-content: space-between; gap: 12px; font-size: 16px; margin-bottom: 8px; }
+.slider output { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+input[type=range] { width: 100%; accent-color: var(--ink); }
+.callout { border-left: 3px solid var(--s-afrique_subsaharienne); padding: 4px 0 4px 14px; margin: 16px 0 0; font-size: 18px; }
+
+.examples { display: grid; gap: 12px; margin: 20px 0; }
+.ex { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.ex .row { display: grid; grid-template-columns: 92px 1fr; gap: 4px 12px; font-size: 16px; }
+.ex .row span:nth-child(odd) { color: var(--ink-3); font-size: 14px; padding-top: 2px; }
+.ex mark { background: #eb683433; color: inherit; border-radius: 3px; padding: 0 2px; }
+.ex p { margin: 10px 0 0; font-size: 15px; color: var(--ink-2); }
+
+ul.checks { padding-left: 20px; margin: 0 0 16px; } ul.checks li { margin-bottom: 8px; }
+footer { padding: 48px 0 64px; color: var(--ink-3); font-size: 15px; }
+footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
+
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .tiles { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; }
+  .flow .arrow { transform: rotate(90deg); justify-self: center; }
+  header.hero { padding: 48px 0 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .tip { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Veritas AI International High School Hackathon 2026 · AI + Languages</p>
+    <h1>Who pays for the correction?</h1>
+    <p class="lede">AI phone agents ask callers to repeat themselves when they are not sure what they heard. I measured who gets asked. The same safety rule makes callers with some French accents repeat themselves more often than others.</p>
+    <p class="byline">By Haris Folas. Born in Cameroon, now in Canada, where I build AI phone agents for small businesses.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section aria-labelledby="who">
+  <h2 id="who">The person this is for</h2>
+  <p>Picture a plumber in Québec who lets an AI agent answer the phone at night. Before going live she picks one setting: how sure the agent must be before it accepts what a caller said. Below that line it says <em>“Sorry, could you repeat that?”</em></p>
+  <p>This project is the check she can run before switching it on. Does that one setting treat a caller from Yaoundé the same way as a caller from Paris?</p>
+  <div class="tiles">
+    <div class="tile"><b>#1</b><span>Cameroon was the top country of birth of immigrants admitted to Québec in 2024 (9,127 people, 15.4 %).<sup><a href="#s1">1</a></sup></span></div>
+    <div class="tile"><b>47 %</b><span>of people who speak French every day live in Sub-Saharan Africa and the Indian Ocean. Europe: 31 %.<sup><a href="#s2">2</a></sup></span></div>
+    <div class="tile"><b>0.2 %</b><span>of French Common Voice recordings are labelled with a Sub-Saharan African accent: 1,846 out of 792,011, from 84 people.<sup><a href="#s3">3</a></sup></span></div>
+  </div>
+</section>
+
+<section aria-labelledby="how">
+  <h2 id="how">How the agent decides</h2>
+  <div class="flow" role="img" aria-label="The caller speaks, Whisper writes the words with a confidence score, and the agent either accepts them or asks the caller to repeat.">
+    <div class="step"><b>The caller speaks</b>“My address is 412 Saint-Joseph Street.”</div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Whisper listens</b>It writes the words and a confidence score.</div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="split">
+      <div class="step"><b>Score above the line</b>The agent accepts and moves on.</div>
+      <div class="step"><b>Score below the line</b>“Sorry, could you repeat that?”</div>
+    </div>
+  </div>
+  <p>The line is set once, for everyone, so that no more than 5 % of calls go through with a mistake. It is the same rule for every caller. Does it cost every caller the same?</p>
+</section>
+
+<section aria-labelledby="f1">
+  <p class="finding">Finding 1</p>
+  <h2 id="f1">Whisper makes about twice as many mistakes on Canadian and African French</h2>
+  <p id="f1-text" class="muted"></p>
+  <div class="card" id="c1">
+    <div class="card-head">
+      <span class="card-title">Word error rate, all speakers</span>
+      <span class="seg" role="group" aria-label="Audio quality">
+        <button type="button" data-cond="clean" aria-pressed="true">Normal audio</button>
+        <button type="button" data-cond="phone" aria-pressed="false">Phone line</button>
+      </span>
+    </div>
+    <svg class="chart" id="c1-svg" role="img" aria-labelledby="c1-desc"><desc id="c1-desc">Bar chart of word error rate per accent group with 95 percent ranges.</desc></svg>
+    <div class="legend"><span>Bar = share of words Whisper got wrong. Thin line = 95 % range.</span></div>
+    <details><summary>Show the numbers</summary><div class="tablewrap" id="c1-table"></div></details>
+  </div>
+</section>
+
+<section aria-labelledby="f2">
+  <p class="finding">Finding 2</p>
+  <h2 id="f2">A phone line hurts African-accented French more</h2>
+  <p id="f2-text" class="muted"></p>
+  <div class="card" id="c2">
+    <div class="card-head"><span class="card-title">Word error rate: normal audio → phone line, all speakers</span></div>
+    <svg class="chart" id="c2-svg" role="img" aria-labelledby="c2-desc"><desc id="c2-desc">For each accent group, the word error rate on normal audio and on a simulated phone line.</desc></svg>
+    <div class="legend"><span><i class="ring"></i>Normal audio</span><span><i class="dot"></i>Phone line</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="f3">
+  <p class="finding">Finding 3</p>
+  <h2 id="f3">Same rule, different bill</h2>
+  <p class="muted">Move the slider to choose how many calls you allow to go through with a mistake. The line is set on half of the speakers, and the bars show what happens to the other half, the test speakers. They show how often each group is asked to repeat (phone line).</p>
+  <div class="card" id="c3">
+    <div class="slider">
+      <label for="target"><span>Calls allowed to go through with a mistake</span><output id="target-out"></output></label>
+      <input id="target" type="range" min="1" max="30" step="1" value="5">
+    </div>
+    <svg class="chart" id="c3-lines" role="img" aria-labelledby="c3l-desc"><desc id="c3l-desc">Share of test callers asked to repeat at every setting of the rule, one line per accent group; a vertical line marks the slider setting.</desc></svg>
+    <svg class="chart" id="c3-svg" role="img" aria-labelledby="c3-desc"><desc id="c3-desc">Share of test callers asked to repeat, per accent group, at the chosen setting.</desc></svg>
+    <p class="callout" id="c3-callout" aria-live="polite"></p>
+    <p class="small" id="c3-base"></p>
+  </div>
+  <p id="f3-text" class="muted"></p>
+</section>
+
+<section aria-labelledby="f4">
+  <p class="finding">Finding 4 · fix 1</p>
+  <h2 id="f4">Tell Whisper the caller speaks French</h2>
+  <p id="f4-text" class="muted"></p>
+  <div class="card" id="c4b">
+    <div class="card-head"><span class="card-title">Word error rate, phone line, test speakers</span></div>
+    <svg class="chart" id="c4b-svg" role="img" aria-labelledby="c4b-desc"><desc id="c4b-desc">Word error rate per accent group when Whisper guesses the language and when it is told the speech is French.</desc></svg>
+    <div class="legend"><span><i style="background:var(--ink-3);opacity:.45"></i>Whisper guesses the language</span><span><i style="background:var(--ink-3)"></i>Told it is French</span></div>
+    <details><summary>Show the numbers</summary><div class="tablewrap" id="c4b-table"></div></details>
+  </div>
+</section>
+
+<section aria-labelledby="f5" id="f5-section" hidden>
+  <p class="finding">Finding 5 · fix 2</p>
+  <h2 id="f5">Confirm only the doubtful words</h2>
+  <p id="f5-text" class="muted"></p>
+  <div class="card" id="c4">
+    <div class="card-head"><span class="card-title">Words the caller has to say again, per call (phone line, test speakers)</span></div>
+    <svg class="chart" id="c4-svg" role="img" aria-labelledby="c4-desc"><desc id="c4-desc">Words re-said per call under whole-sentence repeats and under targeted confirmation, per accent group.</desc></svg>
+    <div class="legend"><span><i style="background:var(--ink-3);opacity:.45"></i>Repeat the whole sentence</span><span><i style="background:var(--ink-3)"></i>Confirm only the doubtful words</span></div>
+    <details><summary>Show the numbers</summary><div class="tablewrap" id="c4-table"></div></details>
+  </div>
+</section>
+
+<section aria-labelledby="fail">
+  <h2 id="fail">Where it fails</h2>
+  <p class="muted">Real examples from the test speakers: what the person read, next to what Whisper wrote.</p>
+  <div class="examples">
+    <div class="ex"><div class="row"><span>Read</span><span>Zengi retourne alors assiéger Homs.</span><span>Whisper</span><span><mark>Réalisé par neo035</mark></span></div>
+      <p>A hallucination: Whisper invented a video-credit line, a phrase common in its training subtitles. It happened once in 1,440 transcriptions. On a phone line, an invented sentence is worse than a wrong word.</p></div>
+    <div class="ex"><div class="row"><span>Read</span><span>Il ne s’agit que d’une ruse de Kestutis pour gagner du temps.</span><span>Whisper</span><span>Il ne s’agit que d’une ruse <mark>mais qu’est-ce que tu utilises</mark> pour gagner du temps.</span></div>
+      <p>Rare names break it for every accent. Common Voice sentences come from Wikipedia and are full of them, which is why I also checked the results without any sentence that contains a name.</p></div>
+    <div class="ex"><div class="row"><span>Read</span><span>L’oiseau le plus lent.</span><span>Whisper</span><span><mark>Loiseau de poulain.</mark></span></div>
+      <p>A short sentence leaves Whisper no context to recover from one unclear sound. Callers giving a name or a street number are in exactly this situation.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="check">
+  <h2 id="check">How I made sure it holds</h2>
+  <ul class="checks" id="checks-list"></ul>
+</section>
+
+<section aria-labelledby="limits">
+  <h2 id="limits">What this does not show</h2>
+  <ul class="checks">
+    <li>Each group has 50 speakers (25 in the test half). That is enough to see a gap of about 5 points, not smaller ones.</li>
+    <li>“Sub-Saharan Africa” is what speakers chose in Common Voice. It pools many countries and accents.</li>
+    <li>People read Wikipedia sentences. They were not making real calls, and the phone line is simulated.</li>
+    <li>I assume a repeated sentence is then heard correctly. Real callers who repeat may be misheard again.</li>
+    <li>I report several comparisons. A result with p around 0.03 on one of them is a strong hint, not a proof.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="next">
+  <h2 id="next">What a business should do before going live</h2>
+  <ul class="checks">
+    <li>Measure how often each accent you serve is asked to repeat, not only the average error rate.</li>
+    <li>Test on phone-quality audio. The gap I found grows on the phone line.</li>
+    <li>Confirm the doubtful words instead of making the caller repeat the whole sentence.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Method.</b> Common Voice French 27.0, 50 speakers per accent group and 4 clips each, plus 30 speakers from OpenSLR 57 (Yaoundé). Speakers were split in half before any result was looked at: one half sets the line, the other half is where results are reported. Whisper large-v3 (through Groq) with the language set to French, text normalised the same way on both sides, word error rate with jiwer, 95 % ranges from 1,000 resamples of speakers. The phone line is a 300–3,400 Hz filter with the 8 kHz telephone codec G.711. No audio from the datasets is shared here, following the Common Voice terms. Code and full results: <a id="repo-link" href="#">GitHub</a>.</p>
+    <p><b>AI tools used.</b> Whisper large-v3 (OpenAI model, run by Groq), faster-whisper small and large-v3-turbo (run on my laptop), and Claude Code (Anthropic) to help write and check the analysis code.</p>
+    <p><b>Sources</b></p>
+    <ol>
+      <li id="s1">Institut de la statistique du Québec, <a href="https://statistique.quebec.ca/fr/document/migrations-internationales-interprovinciales-quebec/tableau/immigrants-selon-le-pays-de-naissance-quebec">Immigrants selon le pays de naissance, Québec</a> (2024, provisional; data from the MIFI).</li>
+      <li id="s2">Organisation internationale de la Francophonie, <a href="https://www.francophonie.org/sites/default/files/2022-03/Synthese_La_langue_francaise_dans_le_monde_2022.pdf"><i>La langue française dans le monde 2022</i>, synthesis</a>, p. 7: daily French speakers by region.</li>
+      <li id="s3"><a href="https://mozilladatacollective.com/datasets/cmu5kub4600pkmh078n7n5ogl">Common Voice Scripted Speech 27.0 – French</a>, Mozilla Data Collective (CC0, not redistributed).</li>
+      <li><a href="https://www.openslr.org/57/">OpenSLR 57, African Accented French</a>.</li>
+      <li>Nieto, Angelika-Nikita, Sarkis &amp; Yang, <a href="https://www.isca-archive.org/interspeech_2026/nieto26_interspeech.pdf">Dialect Bias in Speech Recognition Across 10 Spanish and French Varieties</a>, Interspeech 2026.</li>
+    </ol>
+    <p class="small" id="generated"></p>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const pct = (x, d = 1) => (100 * x).toFixed(d).replace(/\.0$/, "") + " %";
+const pts = (x, d = 1) => (x >= 0 ? "+" : "−") + Math.abs(100 * x).toFixed(d) + " pts";
+const pf = p => p < 0.001 ? "< 0.001" : "= " + p.toFixed(3);  // p-value as text, never "0.000"
+const points = (x, d = 1) => (100 * x).toFixed(d).replace("-", "−") + " points";  // for sentences: no "+" sign
+const NS = "http://www.w3.org/2000/svg";
+const tip = document.getElementById("tip");
+
+function el(name, attrs, parent, text) {
+  const e = document.createElementNS(NS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function showTip(card, evt, html) {
+  tip.innerHTML = html;
+  const r = card.getBoundingClientRect();
+  card.appendChild(tip);
+  let x = evt.clientX - r.left + 12, y = evt.clientY - r.top + 12;
+  x = Math.min(x, r.width - 270);
+  tip.style.left = Math.max(8, x) + "px"; tip.style.top = y + "px";
+  tip.classList.add("on");
+}
+function hideTip() { tip.classList.remove("on"); }
+function color(g) { return `var(--s-${g})`; }
+// Draw at the real pixel width so chart text keeps its size on a phone.
+function dims(svg) {
+  const W = Math.max(300, Math.round(svg.parentElement.getBoundingClientRect().width - 40));
+  return { W, labW: W < 520 ? 128 : 170, valW: W < 520 ? 52 : 70 };
+}
+function short(label, W) { return W < 520 ? label.replace("Cameroon (Yaoundé)", "Yaoundé") : label; }
+
+// Horizontal bars, labels on the left, values on the right (direct labels: no colour-only identity).
+function bars(svg, rows, opt) {
+  svg.innerHTML = svg.querySelector("desc").outerHTML;
+  const { W, labW, valW } = dims(svg), rowH = 46, top = 8, axisH = 22;
+  const H = top + rows.length * rowH + axisH;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const x0 = labW, x1 = W - valW, max = opt.max;
+  const sx = v => x0 + (x1 - x0) * Math.min(v, max) / max;
+  for (let i = 0; i <= 4; i++) {
+    const v = max * i / 4, x = sx(v);
+    el("line", { x1: x, x2: x, y1: top, y2: H - axisH, class: "gridline" }, svg);
+    el("text", { x, y: H - 6, "text-anchor": "middle", class: "axis" }, svg, opt.tick(v));
+  }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH, bh = 18, by = y + (rowH - bh) / 2;
+    el("text", { x: 0, y: by + 14, class: "lab" }, svg, short(r.label, W));
+    const w = Math.max(4, sx(r.value) - x0);
+    el("path", { d: `M${x0},${by} h${w - 4} a4,4 0 0 1 4,4 v${bh - 8} a4,4 0 0 1 -4,4 h${-(w - 4)} z`, fill: color(r.group) }, svg);
+    if (r.lo !== undefined) {
+      el("line", { x1: sx(r.lo), x2: sx(r.hi), y1: by + bh / 2, y2: by + bh / 2, class: "whisk" }, svg);
+      [r.lo, r.hi].forEach(v => el("line", { x1: sx(v), x2: sx(v), y1: by + 3, y2: by + bh - 3, class: "whisk" }, svg));
+    }
+    el("text", { x: W, y: by + 14, "text-anchor": "end", class: "val" }, svg, opt.fmt(r.value));
+    const hit = el("rect", { x: 0, y, width: W, height: rowH, class: "hit" }, svg);
+    hit.addEventListener("mousemove", e => showTip(svg.parentElement, e, r.tip));
+    hit.addEventListener("mouseleave", hideTip);
+  });
+}
+
+function table(container, head, rows) {
+  container.innerHTML = "<table><thead><tr>" + head.map(h => `<th scope="col">${h}</th>`).join("") +
+    "</tr></thead><tbody>" + rows.map(r => "<tr>" + r.map(c => `<td>${c}</td>`).join("") + "</tr>").join("") + "</tbody></table>";
+}
+
+function render(D) {
+  const L = D.labels, order = D.order, S = D.stats;
+  const cvAfrica = "afrique_subsaharienne";
+
+  // Finding 1
+  const f1 = document.getElementById("f1-text");
+  // Word error rate needs no tuning, so it uses every speaker (the cross-fit rows hold the all-speaker values).
+  const t = S.clean_crossfit, p = S.phone_crossfit;
+  const pMax1 = Math.max(...["canada", cvAfrica, "cameroun_yaounde"].flatMap(g => [t[g].wer_gap_p, p[g].wer_gap_p]));
+  f1.textContent = `On normal audio Whisper got ${pct(t.france.wer)} of words wrong for speakers from France, ` +
+    `${pct(t.canada.wer)} for Canada and ${pct(t[cvAfrica].wer)} for Sub-Saharan Africa. ` +
+    `Each gap with France is too large to be chance, on normal audio and on the phone line (p ≤ ${pMax1.toFixed(3)}). ` +
+    `The Yaoundé recordings come from another collection (people read old proverbs, which are harder), so they are a separate check, not a fair comparison.`;
+  let cond = "clean";
+  const draw1 = () => {
+    const s = S[cond + "_crossfit"];
+    const rows = order.map(g => ({ group: g, label: L[g], value: s[g].wer, lo: s[g].wer_lo, hi: s[g].wer_hi,
+      tip: `<b>${L[g]}</b><br>${pct(s[g].wer)} of words wrong<br>95 % range ${pct(s[g].wer_lo)} to ${pct(s[g].wer_hi)}<br>${s[g].speakers} speakers, ${s[g].clips} clips` }));
+    bars(document.getElementById("c1-svg"), rows, { max: 0.25, fmt: v => pct(v), tick: v => pct(v, 0) });
+  };
+  // onclick/oninput (not addEventListener) so a re-render on resize replaces the handlers instead of stacking them
+  cond = document.querySelector('#c1 .seg button[aria-pressed="true"]').dataset.cond;
+  document.querySelectorAll("#c1 .seg button").forEach(b => b.onclick = () => {
+    cond = b.dataset.cond;
+    document.querySelectorAll("#c1 .seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    draw1();
+  });
+  draw1();
+  table(document.getElementById("c1-table"), ["Group", "Speakers", "Normal audio (95 % range)", "Phone line (95 % range)", "Gap vs France, phone"],
+    order.map(g => [L[g], t[g].speakers, `${pct(t[g].wer)} (${pct(t[g].wer_lo)}–${pct(t[g].wer_hi)})`,
+      `${pct(p[g].wer)} (${pct(p[g].wer_lo)}–${pct(p[g].wer_hi)})`, g === "france" ? "—" : `${pts(p[g].wer_gap)}, p ${pf(p[g].wer_gap_p)}`]));
+
+  // Finding 2: dumbbell, all speakers (cross-fit rows hold the all-speaker WER)
+  const W2 = D.phone_widening, A = S.clean_crossfit, B = S.phone_crossfit;
+  document.getElementById("f2-text").textContent =
+    `Turning clean audio into phone-quality audio adds ${points(D.phone_increase.france)} of errors for France but ${points(D.phone_increase[cvAfrica])} for Sub-Saharan Africa. ` +
+    `So the gap between the two groups grows by ${points(W2[cvAfrica].gap)} (95 % range ${points(W2[cvAfrica].lo)} to ${points(W2[cvAfrica].hi)}, p ${pf(W2[cvAfrica].p)}). ` +
+    `It does not grow for Canada (${points(W2.canada.gap)}, p ${pf(W2.canada.p)}) or Yaoundé (${points(W2.cameroun_yaounde.gap)}, p ${pf(W2.cameroun_yaounde.p)}), so this is not a general “accent plus phone” effect.`;
+  const svg2 = document.getElementById("c2-svg");
+  svg2.innerHTML = svg2.querySelector("desc").outerHTML;
+  const { W: Wd, labW, valW: valW2 } = dims(svg2), rowH = 46, top = 8, axisH = 22, H2 = top + order.length * rowH + axisH, max2 = 0.25;
+  svg2.setAttribute("viewBox", `0 0 ${Wd} ${H2}`);
+  const sx2 = v => labW + (Wd - valW2 - labW) * v / max2;
+  for (let i = 0; i <= 4; i++) { const v = max2 * i / 4; el("line", { x1: sx2(v), x2: sx2(v), y1: top, y2: H2 - axisH, class: "gridline" }, svg2); el("text", { x: sx2(v), y: H2 - 6, "text-anchor": "middle", class: "axis" }, svg2, pct(v, 0)); }
+  order.forEach((g, i) => {
+    const y = top + i * rowH + rowH / 2;
+    el("text", { x: 0, y: y + 5, class: "lab" }, svg2, short(L[g], Wd));
+    el("line", { x1: sx2(A[g].wer), x2: sx2(B[g].wer), y1: y, y2: y, stroke: color(g), "stroke-width": 2 }, svg2);
+    el("circle", { cx: sx2(A[g].wer), cy: y, r: 6, fill: "var(--surface)", stroke: color(g), "stroke-width": 2 }, svg2);
+    el("circle", { cx: sx2(B[g].wer), cy: y, r: 6, fill: color(g), stroke: "var(--surface)", "stroke-width": 2 }, svg2);
+    el("text", { x: Wd, y: y + 5, "text-anchor": "end", class: "val" }, svg2, pts(D.phone_increase[g]));
+    const hit = el("rect", { x: 0, y: y - rowH / 2, width: Wd, height: rowH, class: "hit" }, svg2);
+    hit.addEventListener("mousemove", e => showTip(svg2.parentElement, e, `<b>${L[g]}</b><br>Normal audio ${pct(A[g].wer)}<br>Phone line ${pct(B[g].wer)}<br>${A[g].speakers} speakers`));
+    hit.addEventListener("mouseleave", hideTip);
+  });
+
+  // Finding 3: slider
+  const steps = D.slider.phone, input = document.getElementById("target");
+  // Every setting at once: one line per group, the slider position as a vertical marker.
+  const lines = marker => {
+    const svg = document.getElementById("c3-lines");
+    svg.innerHTML = svg.querySelector("desc").outerHTML;
+    const { W } = dims(svg), labR = W < 520 ? 92 : 150, left = 40, top = 10, bottom = 34, H = W < 520 ? 240 : 300;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const x = v => left + (W - labR - left) * (v - 0.01) / 0.29, y = v => top + (H - top - bottom) * (1 - v);
+    for (let i = 0; i <= 4; i++) { el("line", { x1: left, x2: W - labR, y1: y(i / 4), y2: y(i / 4), class: "gridline" }, svg); el("text", { x: left - 6, y: y(i / 4) + 4, "text-anchor": "end", class: "axis" }, svg, pct(i / 4, 0)); }
+    [0.01, 0.1, 0.2, 0.3].forEach(v => el("text", { x: x(v), y: H - 16, "text-anchor": "middle", class: "axis" }, svg, pct(v, 0)));
+    el("text", { x: (left + W - labR) / 2, y: H - 2, "text-anchor": "middle", class: "axis" }, svg, "calls allowed through with a mistake");
+    el("line", { x1: x(marker), x2: x(marker), y1: top, y2: H - bottom, stroke: "var(--ink-3)", "stroke-dasharray": "3 3" }, svg);
+    const ends = [];
+    order.forEach(g => {
+      el("polyline", { points: steps.map(st => `${x(st.target)},${y(st.groups[g].repeat)}`).join(" "), fill: "none", stroke: color(g), "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+      ends.push([y(steps[steps.length - 1].groups[g].repeat), g]);
+    });
+    let last = -99;
+    ends.sort((a, b) => a[0] - b[0]).forEach(([yy, g]) => { yy = Math.max(yy, last + 16); last = yy; el("text", { x: W - labR + 6, y: yy + 4, class: "axis" }, svg, short(L[g], W).replace("Sub-Saharan Africa", W < 520 ? "Sub-Sah. Africa" : "Sub-Saharan Africa")); });
+  };
+  const draw3 = () => {
+    const s = steps.find(x => Math.round(x.target * 100) === +input.value);
+    document.getElementById("target-out").textContent = input.value + " %";
+    const rows = order.map(g => ({ group: g, label: L[g], value: s.groups[g].repeat,
+      tip: `<b>${L[g]}</b><br>${pct(s.groups[g].repeat, 0)} asked to repeat<br>${pct(s.groups[g].slip, 0)} of calls went through with a mistake` }));
+    bars(document.getElementById("c3-svg"), rows, { max: 1, fmt: v => pct(v, 0), tick: v => pct(v, 0) });
+    lines(+input.value / 100);
+    const fr = s.groups.france.repeat, af = s.groups[cvAfrica].repeat;
+    document.getElementById("c3-callout").textContent =
+      `Callers from Sub-Saharan Africa are asked to repeat ${pct(af, 0)} of the time, against ${pct(fr, 0)} for France: ${(af / fr).toFixed(1)} times as often.`;
+    const P = s.pooled;
+    document.getElementById("c3-base").textContent =
+      `Against simple baselines (all test callers together): the rule asks ${pct(P.repeat, 0)} of callers to repeat and lets ${pct(P.slip, 0)} of calls through with a mistake. ` +
+      `Asking the same share of callers at random would let ${pct(P.random_slip, 0)} through, and never asking would let ${pct(P.never_slip, 0)} through. ` +
+      `So Whisper's score helps, but only a little.`;
+  };
+  input.oninput = draw3;
+  draw3();
+  const african = [cvAfrica, "cameroun_yaounde"], runs = ["clean_test", "phone_test", "clean_crossfit", "phone_crossfit"];
+  const cmp = african.flatMap(g => runs.map(k => S[k][g]));
+  const more = cmp.filter(r => r.repeat_gap > 0).length, sure = cmp.filter(r => r.repeat_gap > 0 && r.repeat_gap_p < 0.05).length;
+  const gaps = cmp.map(r => Math.round(100 * r.repeat_gap));
+  const aucs = order.map(g => S.phone_crossfit[g].auc);
+  document.getElementById("f3-text").textContent =
+    `I ran this comparison ${cmp.length} ways: both African groups, normal audio and phone line, and with each half of the speakers taking its turn as the test half. ` +
+    `African-accented callers were asked to repeat more in ${more} of ${cmp.length} (${Math.min(...gaps)} to ${Math.max(...gaps)} more calls out of 100). ` +
+    `Taken one by one, ${sure} of those ${cmp.length} gaps are large enough to rule out chance (p < 0.05); the others point the same way but are not proof on their own. ` +
+    `Canada is not asked to repeat more. ` +
+    `Why does the rule make so many people repeat? Whisper's sentence score is a weak alarm: it ranks a correctly heard sentence above a misheard one only ` +
+    `${Math.round(100 * Math.min(...aucs))} to ${Math.round(100 * Math.max(...aucs))} % of the time (a coin flip would give 50 %). So to let fewer than 5 calls in 100 through with a mistake, the agent has to ask most callers to repeat.`;
+
+  // Finding 4: language hint (fix 1)
+  const LH = D.language_hint, af4 = LH[cvAfrica], ca4 = LH.canada, fr4 = LH.france;
+  document.getElementById("f4-text").textContent =
+    `This is the fix the hackathon brief suggests. When Whisper has to guess the language, it guessed wrong for ${af4.wrong_language} of 100 African-accented calls and ${ca4.wrong_language} of 100 Canadian ones, against ${fr4.wrong_language} for France. ` +
+    `It heard Korean, Italian or Haitian Creole, or translated the caller into English. ` +
+    `Saying “this is French” cuts errors by ${points(ca4.gain)} for Canada and ${points(af4.gain)} for Sub-Saharan Africa, and changes nothing for France (${points(fr4.gain)}). ` +
+    `So it narrows the gap with France: by ${points(ca4.narrowing)} for Canada (p ${pf(ca4.narrowing_p)}) and ${points(af4.narrowing)} for Sub-Saharan Africa (p ${pf(af4.narrowing_p)}, ${af4.narrowing_p < 0.05 ? "too large to be chance" : "just short of proof"}). ` +
+    `It is free, so every French phone agent should do it. My main measurements above already use it, so the gaps above are what remains after this fix.`;
+  const svg4b = document.getElementById("c4b-svg");
+  svg4b.innerHTML = svg4b.querySelector("desc").outerHTML;
+  const g4 = order.filter(g => LH[g]);
+  const { W: W4b, labW: lab4b, valW: val4b } = dims(svg4b), rh4 = 58, t4 = 8, a4 = 22, H4b = t4 + g4.length * rh4 + a4, max4b = 0.25;
+  svg4b.setAttribute("viewBox", `0 0 ${W4b} ${H4b}`);
+  const sx4b = v => lab4b + (W4b - val4b - lab4b) * v / max4b;
+  for (let i = 0; i <= 4; i++) { const v = max4b * i / 4; el("line", { x1: sx4b(v), x2: sx4b(v), y1: t4, y2: H4b - a4, class: "gridline" }, svg4b); el("text", { x: sx4b(v), y: H4b - 6, "text-anchor": "middle", class: "axis" }, svg4b, pct(v, 0)); }
+  g4.forEach((g, i) => {
+    const y = t4 + i * rh4, r = LH[g];
+    el("text", { x: 0, y: y + 30, class: "lab" }, svg4b, short(L[g], W4b));
+    [[r.wer_no_hint, 8, .45], [r.wer_fr_hint, 30, 1]].forEach(([v, dy, op]) => {
+      const w = Math.max(4, sx4b(v) - lab4b);
+      el("path", { d: `M${lab4b},${y + dy} h${w - 4} a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h${-(w - 4)} z`, fill: color(g), opacity: op }, svg4b);
+      el("text", { x: W4b, y: y + dy + 13, "text-anchor": "end", class: "val" }, svg4b, pct(v));
+    });
+    const hit = el("rect", { x: 0, y, width: W4b, height: rh4, class: "hit" }, svg4b);
+    hit.addEventListener("mousemove", e => showTip(svg4b.parentElement, e, `<b>${L[g]}</b><br>Guessing the language: ${pct(r.wer_no_hint)}<br>Told it is French: ${pct(r.wer_fr_hint)}<br>Wrong language guessed: ${r.wrong_language} of ${r.clips}`));
+    hit.addEventListener("mouseleave", hideTip);
+  });
+  table(document.getElementById("c4b-table"), ["Group", "Wrong language guessed", "Errors, guessing", "Errors, told French", "Change"],
+    g4.map(g => [L[g], `${LH[g].wrong_language} / ${LH[g].clips}`, pct(LH[g].wer_no_hint), pct(LH[g].wer_fr_hint),
+      `${pts(-LH[g].gain)} (p ${pf(LH[g].gain_p)})`]));
+
+  // Finding 5 (only once the comparison has been run)
+  if (D.targeted && D.targeted.length) {
+    document.getElementById("f5-section").hidden = false;
+    const T = D.targeted, get = (pol, g) => T.find(r => r.policy === pol && r.group === g);
+    const rows4 = [];
+    const svg4 = document.getElementById("c4-svg");
+    svg4.innerHTML = svg4.querySelector("desc").outerHTML;
+    const { W: W4, labW: lab4, valW: val4 } = dims(svg4), rh = 58, top4 = 8, ax4 = 22, H4 = top4 + order.length * rh + ax4;
+    const max4 = Math.max(...T.map(r => +r.words_hi)) * 1.05;
+    svg4.setAttribute("viewBox", `0 0 ${W4} ${H4}`);
+    const sx4 = v => lab4 + (W4 - val4 - lab4) * v / max4;
+    for (let i = 0; i <= 4; i++) { const v = max4 * i / 4; el("line", { x1: sx4(v), x2: sx4(v), y1: top4, y2: H4 - ax4, class: "gridline" }, svg4); el("text", { x: sx4(v), y: H4 - 6, "text-anchor": "middle", class: "axis" }, svg4, v.toFixed(1)); }
+    order.forEach((g, i) => {
+      const y = top4 + i * rh, a = get("sentence", g), b = get("targeted", g);
+      el("text", { x: 0, y: y + 30, class: "lab" }, svg4, short(L[g], W4));
+      [[a, 8, .45], [b, 30, 1]].forEach(([r, dy, op]) => {
+        const w = Math.max(4, sx4(+r.words) - lab4);
+        el("path", { d: `M${lab4},${y + dy} h${w - 4} a4,4 0 0 1 4,4 v${16 - 8} a4,4 0 0 1 -4,4 h${-(w - 4)} z`, fill: color(g), opacity: op }, svg4);
+        el("text", { x: W4, y: y + dy + 13, "text-anchor": "end", class: "val" }, svg4, (+r.words).toFixed(1));
+      });
+      const hit = el("rect", { x: 0, y, width: W4, height: rh, class: "hit" }, svg4);
+      hit.addEventListener("mousemove", e => showTip(svg4.parentElement, e, `<b>${L[g]}</b><br>Whole sentence: ${(+a.words).toFixed(1)} words, ${pct(+a.interrupted, 0)} interrupted<br>Doubtful words: ${(+b.words).toFixed(1)} words, ${pct(+b.interrupted, 0)} interrupted`));
+      hit.addEventListener("mouseleave", hideTip);
+      rows4.push([L[g], `${(+a.words).toFixed(2)} (${pct(+a.slip)} slip)`, `${(+b.words).toFixed(2)} (${pct(+b.slip)} slip)`]);
+    });
+    table(document.getElementById("c4-table"), ["Group", "Whole sentence: words per call", "Doubtful words: words per call"], rows4);
+    if (D.targeted_text) document.getElementById("f5-text").textContent = D.targeted_text;
+  }
+
+  // Robustness list
+  const R = D.robustness.clean;
+  const items = [
+    `Sentences with a rare name removed: ${pct(R.france.wer_no_name)} errors for France, ${pct(R.canada.wer_no_name)} for Canada, ${pct(R[cvAfrica].wer_no_name)} for Sub-Saharan Africa. The gap stays.`,
+    `Only the cleaner half of the recordings (estimated noise level): ${pct(R.france.wer_good_mic)}, ${pct(R.canada.wer_good_mic)} and ${pct(R[cvAfrica].wer_good_mic)}. Recording quality is about the same in the three Common Voice groups (${R.france.snr_db.toFixed(0)}, ${R.canada.snr_db.toFixed(0)} and ${R[cvAfrica].snr_db.toFixed(0)} dB), so it does not explain the gap.`,
+    `African sentences were slightly longer (${R[cvAfrica].mean_words.toFixed(1)} words against ${R.france.mean_words.toFixed(1)}). Giving every group France's mix of sentence lengths barely moves the share of misheard calls (${pct(R[cvAfrica].misheard)} → ${pct(R[cvAfrica].misheard_fr_length)}).`,
+    `At most 4 clips per speaker, so a few very active volunteers cannot decide the result. Ranges come from resampling speakers, not clips.`,
+    `For the repeat rule, the line is chosen on one half of the speakers and results are measured on the other half, then the halves swap. A rule is never judged on the people it was tuned on.`,
+    `Every p-value looks both ways (could the gap be zero, or even reversed?), which is the stricter convention.`,
+    `All 1,440 transcriptions came back, none empty. Whisper large-v3 hallucinated once.`
+  ];
+  document.getElementById("checks-list").innerHTML = items.map(x => `<li>${x}</li>`).join("");
+  document.getElementById("generated").textContent = `Numbers generated from the analysis on ${D.generated}.`;
+  if (D.repo) document.getElementById("repo-link").href = D.repo;
+}
+
+let DATA = null, resizeTimer = 0;
+window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => DATA && render(DATA), 150); });
+fetch("data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => { DATA = d; render(d); })
+  .catch(err => { document.querySelector("main").insertAdjacentHTML("afterbegin", `<p class="small">Could not load the results (${err.message}).</p>`); });
+</script>
+</body>
+</html>

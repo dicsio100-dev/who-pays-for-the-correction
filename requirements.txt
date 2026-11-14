@@ -1,0 +1,7 @@
+# Python 3.12. ffmpeg must also be installed and on PATH (audio conversion, phone-line simulation).
+faster-whisper==1.2.1
+jiwer==4.0.0
+text2num==3.1.0
+soundfile==0.14.0
+numpy==2.5.1
+requests==2.34.2
