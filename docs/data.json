@@ -2685,6 +2685,14 @@
    "p": 0.756
   }
  },
+ "human_check": {
+  "clips": 20,
+  "ref_ok": 18,
+  "with_errors": 12,
+  "all_real": 8,
+  "some_real": 2,
+  "none_real": 2
+ },
  "language_hint": {
   "france": {
    "group": "france",

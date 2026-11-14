@@ -41,7 +41,7 @@ Word error rate, all speakers:
 
 | Group | Clean | Phone | Gap vs France, clean | Gap vs France, phone |
 |---|---|---|---|---|
-| France (50) | 7.2 % | 7.9 % | — | — |
+| France (50) | 7.3 % | 7.9 % | — | — |
 | Canada (50) | 12.3 % | 13.6 % | +5.1 pts, p = 0.006 | +5.7 pts, p = 0.010 |
 | Sub-Saharan Africa (50) | 10.7 % | 14.6 % | +3.4 pts, p = 0.028 | +6.7 pts, p = 0.002 |
 | Yaoundé (30, other corpus) | 17.9 % | 18.8 % | +10.6 pts, p < 0.001 | +10.8 pts, p < 0.001 |
@@ -98,6 +98,16 @@ Several "English" outputs are translations of the French speech. All other resul
 Whisper small (local, per-word confidence) is too weak on phone audio: WER 17.7 / 43.8 / 33.2 %, so reaching 5 %
 slip means flagging nearly every word. large-v3-turbo (local, greedy, per-word confidence) is running on the phone
 clips; `policy_words.py phone turbo` will compare whole-sentence repeats with targeted confirmation.
+
+## Human listening check (Haris, native French speaker, 2026-11-14)
+
+20 clips, 5 per group (`make_check_page.py`, answers in `results/human_check.json`).
+- Reference text matches the speech: 18 / 20. France 4/5 (dataset typo "protugais": speaker and Whisper said
+  "portugais"), Canada 5/5, Sub-Saharan Africa 5/5, Yaoundé 4/5 (speaker said "humanité" instead of "amitié").
+- Clips with counted errors: 12. All counted errors real: 8; some: 2 (Africa, e.g. inaudible agreement
+  "consommés/consommées"); none: 2 (Canada "l'article L." truncated sentence; the Yaoundé misreading).
+- The contradictor's "flip" condition (extra African/Canadian errors caused by misreading) is NOT met: 0 misreadings
+  in the Canadian and African Common Voice clips checked. Artifacts appear in every group: noise, not the gap.
 
 ## Limits to state on the page
 

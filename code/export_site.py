@@ -79,6 +79,15 @@ def main() -> None:
             "phone_increase": {g: stats["phone_crossfit"][g]["wer"] - stats["clean_crossfit"][g]["wer"] for g in GROUP_ORDER},
             "phone_widening": {g: dict(zip(("gap", "lo", "hi", "p"), phone_widening(g)))
                                for g in GROUP_ORDER if g != "france"}}
+    check = RESULTS / "human_check.json"  # 20 clips judged by ear by a native French speaker (make_check_page.py)
+    if check.exists():
+        answers = json.loads(check.read_text(encoding="utf-8"))
+        with_errors = [a for a in answers if a["errors"]]
+        data["human_check"] = {"clips": len(answers), "ref_ok": sum(a.get("ref") == "Oui" for a in answers),
+                               "with_errors": len(with_errors),
+                               "all_real": sum(a.get("err") == "Toutes" for a in with_errors),
+                               "some_real": sum(a.get("err") == "Certaines" for a in with_errors),
+                               "none_real": sum(a.get("err") == "Aucune" for a in with_errors)}
     with open(RESULTS / "language_hint.csv", encoding="utf-8", newline="") as f:
         data["language_hint"] = {r["group"]: {k: (v if k in ("group", "languages") else (float(v) if v else None))
                                               for k, v in r.items()} for r in csv.DictReader(f)}

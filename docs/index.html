@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who Pays for the Correction?</title>
 <meta name="description" content="An AI phone agent asks callers to repeat when it is unsure. Does the same rule cost every French accent the same? Measured on Whisper with Common Voice and Yaoundé recordings.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1720'/%3E%3Cpath d='M9 20c2-6 12-6 14 0' stroke='%23eb6834' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='11' r='3' fill='%23f2f4f7'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -529,6 +530,8 @@ function render(D) {
     `Every p-value looks both ways (could the gap be zero, or even reversed?), which is the stricter convention.`,
     `All 1,440 transcriptions came back, none empty. Whisper large-v3 hallucinated once.`
   ];
+  const HC = D.human_check;
+  if (HC) items.unshift(`I listened to ${HC.clips} clips myself (5 per group) as a native French speaker. The text matched what was said in ${HC.ref_ok}: one dataset sentence has a typo (“protugais”), and one Yaoundé speaker said “humanité” instead of “amitié”. In the ${HC.with_errors} clips with counted errors, all of them were real Whisper mistakes in ${HC.all_real}, some in ${HC.some_real} and none in ${HC.none_real}. These slips show up in every group, so they add noise but do not explain the gap. French also has silent endings (“consommés” and “consommées” sound the same), which count as errors for everyone.`);
   document.getElementById("checks-list").innerHTML = items.map(x => `<li>${x}</li>`).join("");
   document.getElementById("generated").textContent = `Numbers generated from the analysis on ${D.generated}.`;
   if (D.repo) document.getElementById("repo-link").href = D.repo;

@@ -42,6 +42,8 @@ Started from suggested project 4.4.3 (speech recognition across accents). Added:
 
 **Fix 1, telling Whisper "this is French":** without it, Whisper guessed the wrong language for 9 % of African and 7 % of Canadian callers against 2 % for France, sometimes translating them into English. With it, the gap with France shrinks by 2.9 points for Canada (p = 0.012) and 1.3 points for Sub-Saharan Africa (p = 0.058). Results 1–3 already use this fix.
 
+**Checked by ear:** I listened to 20 clips (5 per group). The text matched the speech in 18 (one typo in the dataset, one Yaoundé speaker who read a different word); in 8 of the 12 clips with counted errors, every counted error was a real Whisper mistake. Such slips appear in every group, so they add noise but do not explain the gap.
+
 **Where it fails:** names. Whisper gets about one name in three wrong for every accent (Wikipedia names such as "Kestutis" or "Mugla"), so a phone agent should always confirm names, whoever calls. It also invented a sentence once ("Réalisé par neo035", a subtitle credit) out of 1,440 transcriptions.
 
 ## What we'd do next
