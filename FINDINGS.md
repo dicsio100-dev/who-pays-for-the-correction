@@ -93,11 +93,34 @@ Phone, test speakers, whisper-large-v3 without vs with `language=fr`:
 
 Several "English" outputs are translations of the French speech. All other results already use `language=fr`.
 
-## Result 5 (in progress) — Fix 2: confirm only the doubtful words
+## Result 5 — Fix 2: confirm only the doubtful words lowers the bill for everyone, not the gap (policy_words.py)
 
-Whisper small (local, per-word confidence) is too weak on phone audio: WER 17.7 / 43.8 / 33.2 %, so reaching 5 %
-slip means flagging nearly every word. large-v3-turbo (local, greedy, per-word confidence) is running on the phone
-clips; `policy_words.py phone turbo` will compare whole-sentence repeats with targeted confirmation.
+Whisper small (local, per-word confidence) was too weak on phone audio (WER 17.7 / 43.8 / 33.2 %): reaching 5 % slip
+meant flagging nearly every word. So this uses large-v3-turbo (local, int8, greedy, per-word confidence), phone line,
+WER 8.4 / 18.0 / 17.8 / 16.4 % (France / Canada / Sub-Saharan Africa / Yaoundé). Both rules are tuned on the TUNE
+half (all groups pooled) for slip <= 5 %, judged on TEST speakers. Same optimistic assumption for both: what the
+caller re-says is heard right. Words re-said = whole sentence for a repeat, flagged words for targeted.
+
+| Group | Whole sentence: words/call | Targeted: words/call | Saved [95 %] | Interrupted (sentence → targeted) | Slip (s / t) |
+|---|---|---|---|---|---|
+| France | 5.67 | 3.44 | 2.23 [1.58, 2.96] (39 %) | 63 % → 96 % | 8 % / 7 % |
+| Canada | 6.91 | 5.28 | 1.63 [1.05, 2.26] (24 %) | 73 % → 98 % | 5 % / 7 % |
+| Sub-Saharan Africa | 7.92 | 5.65 | 2.27 [1.51, 3.13] (29 %) | 78 % → 100 % | 3 % / 3 % |
+| Yaoundé | 8.57 | 5.63 | 2.93 [2.17, 3.73] (34 %) | 93 % → 100 % | 2 % / 3 % |
+
+All savings p < 0.001. Gap with France in words re-said per call:
+
+| Group | Whole sentence | Targeted | Change (does targeted close it?) |
+|---|---|---|---|
+| Canada | +1.24 [−0.15, +2.77] p = 0.094 | +1.84 [+0.84, +2.87] p = 0.002 | −0.60 [−1.45, +0.33] p = 0.23 |
+| Sub-Saharan Africa | +2.25 [+0.82, +3.74] p = 0.002 | +2.21 [+1.24, +3.22] p < 0.001 | +0.04 [−0.99, +1.17] p = 0.91 |
+| Yaoundé | +2.90 [+1.47, +4.37] p < 0.001 | +2.19 [+1.17, +3.19] p < 0.001 | +0.70 [−0.23, +1.80] p = 0.15 |
+
+Reading: targeted confirmation cuts the words callers say again by a quarter to 40 % in every group, but the gap
+with France stays the same size (no change is significant). It also turns most calls into at least one question
+(96–100 %): it asks for less, but asks almost everyone. The fix lowers the bill; it does not make it fair. This
+points back to the recognizer itself (more African-accented French in training data), not the agent's rule.
+Limit: one model (turbo, greedy, CPU), test half only (25 speakers per group), no cross-fit for this comparison.
 
 ## Human listening check (Haris, native French speaker, 2026-11-14)
 

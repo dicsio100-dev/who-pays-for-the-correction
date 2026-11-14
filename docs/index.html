@@ -260,7 +260,8 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
   <ul class="checks">
     <li>Measure how often each accent you serve is asked to repeat, not only the average error rate.</li>
     <li>Test on phone-quality audio. The gap I found grows on the phone line.</li>
-    <li>Confirm the doubtful words instead of making the caller repeat the whole sentence.</li>
+    <li>Tell the recognizer the language, and confirm only the doubtful words instead of the whole sentence. Both help every caller; neither closes the gap on its own.</li>
+    <li>Always confirm names, whoever calls.</li>
   </ul>
 </section>
 
@@ -498,10 +499,10 @@ function render(D) {
     const svg4 = document.getElementById("c4-svg");
     svg4.innerHTML = svg4.querySelector("desc").outerHTML;
     const { W: W4, labW: lab4, valW: val4 } = dims(svg4), rh = 58, top4 = 8, ax4 = 22, H4 = top4 + order.length * rh + ax4;
-    const max4 = Math.max(...T.map(r => +r.words_hi)) * 1.05;
+    const max4 = Math.ceil(Math.max(...T.map(r => +r.words_hi)) / 2) * 2;  // round axis: ticks every 2 words
     svg4.setAttribute("viewBox", `0 0 ${W4} ${H4}`);
     const sx4 = v => lab4 + (W4 - val4 - lab4) * v / max4;
-    for (let i = 0; i <= 4; i++) { const v = max4 * i / 4; el("line", { x1: sx4(v), x2: sx4(v), y1: top4, y2: H4 - ax4, class: "gridline" }, svg4); el("text", { x: sx4(v), y: H4 - 6, "text-anchor": "middle", class: "axis" }, svg4, v.toFixed(1)); }
+    for (let v = 0; v <= max4; v += 2) { el("line", { x1: sx4(v), x2: sx4(v), y1: top4, y2: H4 - ax4, class: "gridline" }, svg4); el("text", { x: sx4(v), y: H4 - 6, "text-anchor": "middle", class: "axis" }, svg4, String(v)); }
     order.forEach((g, i) => {
       const y = top4 + i * rh, a = get("sentence", g), b = get("targeted", g);
       el("text", { x: 0, y: y + 30, class: "lab" }, svg4, short(L[g], W4));
@@ -516,7 +517,21 @@ function render(D) {
       rows4.push([L[g], `${(+a.words).toFixed(2)} (${pct(+a.slip)} slip)`, `${(+b.words).toFixed(2)} (${pct(+b.slip)} slip)`]);
     });
     table(document.getElementById("c4-table"), ["Group", "Whole sentence: words per call", "Doubtful words: words per call"], rows4);
-    if (D.targeted_text) document.getElementById("f5-text").textContent = D.targeted_text;
+    const G = Object.fromEntries((D.targeted_gaps || []).map(r => [r.group, r]));
+    if (G[cvAfrica] && G.france) {
+      const f = G.france, af = G[cvAfrica], fS = get("sentence", "france"), fT = get("targeted", "france"),
+        aS = get("sentence", cvAfrica), aT = get("targeted", cvAfrica),
+        lo = Math.min(...order.map(g => G[g].saved_share)), hi = Math.max(...order.map(g => G[g].saved_share)),
+        iLo = Math.min(...order.map(g => get("targeted", g).interrupted));
+      document.getElementById("f5-text").textContent =
+        `Instead of "could you repeat that?", the agent asks only about the words Whisper doubts (for example "did you say Mbarga?"). ` +
+        `This needs a confidence score for each word, so it runs on Whisper large-v3-turbo on a laptop. ` +
+        `Tuned to the same safety setting as before, every group says fewer words again: ${pct(lo, 0)} to ${pct(hi, 0)} fewer ` +
+        `(France ${(+fS.words).toFixed(1)} to ${(+fT.words).toFixed(1)}, Sub-Saharan Africa ${(+aS.words).toFixed(1)} to ${(+aT.words).toFixed(1)}). ` +
+        `But the gap does not close: Sub-Saharan African callers still say ${(+af.gap_targeted).toFixed(1)} more words per call than France ` +
+        `(p ${pf(af.gap_targeted_p).replace(" ", " ")}), against ${(+af.gap_sentence).toFixed(1)} with whole-sentence repeats; the change is not significant (p ${pf(af.gap_change_p)}). ` +
+        `And at least ${pct(iLo, 0)} of calls now get a question. The fix makes the bill smaller for everyone. It does not make it fair.`;
+    }
   }
 
   // Robustness list

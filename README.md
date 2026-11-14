@@ -42,6 +42,8 @@ Started from suggested project 4.4.3 (speech recognition across accents). Added:
 
 **Fix 1, telling Whisper "this is French":** without it, Whisper guessed the wrong language for 9 % of African and 7 % of Canadian callers against 2 % for France, sometimes translating them into English. With it, the gap with France shrinks by 2.9 points for Canada (p = 0.012) and 1.3 points for Sub-Saharan Africa (p = 0.058). Results 1–3 already use this fix.
 
+**Fix 2, confirming only the doubtful words:** instead of "could you repeat that?", the agent asks only about the words Whisper is unsure of. This needs a confidence score per word, so it runs on Whisper large-v3-turbo on a laptop (phone line, test speakers, tuned to the same safety setting). Every group says fewer words again, 24 % to 39 % fewer (France 5.7 → 3.4 words per call, Sub-Saharan Africa 7.9 → 5.7). But the gap does not close: Sub-Saharan African callers still say 2.2 more words per call than France (p < 0.001), against 2.3 with whole-sentence repeats (change p = 0.91), and at least 96 % of calls now get a question. The fix makes the bill smaller for everyone; it does not make it fair.
+
 **Checked by ear:** I listened to 20 clips (5 per group). The text matched the speech in 18 (one typo in the dataset, one Yaoundé speaker who read a different word); in 8 of the 12 clips with counted errors, every counted error was a real Whisper mistake. Such slips appear in every group, so they add noise but do not explain the gap.
 
 **Where it fails:** names. Whisper gets about one name in three wrong for every accent (Wikipedia names such as "Kestutis" or "Mugla"), so a phone agent should always confirm names, whoever calls. It also invented a sentence once ("Réalisé par neo035", a subtitle credit) out of 1,440 transcriptions.
@@ -49,7 +51,7 @@ Started from suggested project 4.4.3 (speech recognition across accents). Added:
 ## What we'd do next
 
 - Test on real calls (with permission) instead of a simulated phone line, and separate African countries instead of one pooled group.
-- The gap comes from Whisper's decoder (Nieto et al.): the real fix is more African-accented French in training data. Common Voice has 1,846 such clips out of 792,011.
+- Neither fix on the agent's side closes the gap, and it comes from Whisper's decoder (Nieto et al.): the real fix is more African-accented French in training data. Common Voice has 1,846 such clips out of 792,011.
 
 ## Limits
 

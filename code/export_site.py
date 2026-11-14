@@ -91,10 +91,12 @@ def main() -> None:
     with open(RESULTS / "language_hint.csv", encoding="utf-8", newline="") as f:
         data["language_hint"] = {r["group"]: {k: (v if k in ("group", "languages") else (float(v) if v else None))
                                               for k, v in r.items()} for r in csv.DictReader(f)}
-    policy_file = RESULTS / "policy_phone_turbo.csv"
-    if policy_file.exists():
-        with open(policy_file, encoding="utf-8", newline="") as f:
-            data["targeted"] = list(csv.DictReader(f))
+    num = lambda r, text: {k: (v if k in text else (float(v) if v else None)) for k, v in r.items()}
+    for key, name, text in (("targeted", "policy_phone_turbo.csv", ("condition", "policy", "group")),
+                            ("targeted_gaps", "policy_gaps_phone_turbo.csv", ("group",))):
+        if (RESULTS / name).exists():  # fix 2 needs the local turbo run (policy_words.py phone turbo)
+            with open(RESULTS / name, encoding="utf-8", newline="") as f:
+                data[key] = [num(r, text) for r in csv.DictReader(f)]
     SITE.mkdir(parents=True, exist_ok=True)
     (SITE / "data.json").write_text(json.dumps(no_nan(data), ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
     five = next(s for s in data["slider"]["phone"] if s["target"] == 0.05)

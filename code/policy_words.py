@@ -12,7 +12,8 @@ Assumption (same for both policies, optimistic for both): what the caller re-say
 Threshold t is chosen on TUNE speakers (all groups pooled) for slip <= TARGET; results on TEST speakers.
 
 Usage: python policy_words.py [CONDITION] [MODEL]   (default: phone turbo)
-Output: results/policy_<condition>_<model>.csv (table) and results/curves_<condition>_<model>.csv
+Output: results/policy_<condition>_<model>.csv (table), results/curves_<condition>_<model>.csv,
+        results/policy_gaps_<condition>_<model>.csv (words saved per group, gap with France under each rule)
 """
 from __future__ import annotations
 
@@ -23,7 +24,7 @@ import sys
 
 import jiwer
 
-from analyze import GROUP_ORDER, TARGET, bootstrap, by_speaker, seeded, wer
+from analyze import BOOT, GROUP_ORDER, TARGET, bootstrap, bootstrap_gap, by_speaker, p_two_sided, seeded, wer
 from common import MANIFEST, RESULTS, normalise
 
 
@@ -128,13 +129,46 @@ def main(condition: str, model: str) -> None:
                                "interrupted": inter, "words": words, "slip": slip})
     for g in groups:
         gr = [r for r in test if r["group"] == g]
-        print(f"never     {g:24s} slip = misheard share {sum(r['misheard'] for r in gr) / len(gr):.1%}   small WER {wer(gr):.1%}")
-    for path, data in ((f"policy_{condition}_{model}.csv", table), (f"curves_{condition}_{model}.csv", curves)):
+        print(f"never     {g:24s} slip = misheard share {sum(r['misheard'] for r in gr) / len(gr):.1%}   {model} WER {wer(gr):.1%}")
+    gaps = gap_table(tune, test, groups, condition, model)
+    for path, data in ((f"policy_{condition}_{model}.csv", table), (f"curves_{condition}_{model}.csv", curves),
+                       (f"policy_gaps_{condition}_{model}.csv", gaps)):
         with open(RESULTS / path, "w", encoding="utf-8", newline="") as f:
             w = csv.DictWriter(f, fieldnames=list(data[0]))
             w.writeheader()
             w.writerows(data)
     print(f"saved results/policy_{condition}_{model}.csv and results/curves_{condition}_{model}.csv")
+
+
+def gap_table(tune: list[dict], test: list[dict], groups: list[str], condition: str, model: str) -> list[dict]:
+    """Per group: words saved by targeted vs sentence (same calls, speakers resampled), and the
+    words-re-said gap with France under each rule, plus how much targeted changes that gap."""
+    ts, tt = choose(tune, "sentence"), choose(tune, "targeted")
+    saved = lambda x: sentence(x, ts)[1] - targeted(x, tt)[1]
+    base = [r for r in test if r["group"] == groups[0]]
+    out = []
+    print(f"\n{'group':24s} {'words saved':>34s}   {'gap vs France, sentence':>34s}   {'gap, targeted':>34s}   {'gap change':>34s}")
+    for g in groups:
+        gr = [r for r in test if r["group"] == g]
+        rng = seeded(model, condition, "saved", g)
+        spk = by_speaker(gr)
+        names = list(spk)
+        vals = sorted(saved([c for s in (rng.choice(names) for _ in names) for c in spk[s]]) for _ in range(BOOT))
+        row = {"group": g, "saved": saved(gr), "saved_lo": vals[int(0.025 * BOOT)],
+               "saved_hi": vals[int(0.975 * BOOT) - 1], "saved_p": p_two_sided(vals),
+               "saved_share": saved(gr) / sentence(gr, ts)[1]}
+        if g != groups[0]:
+            for name, fn, t in (("sentence", sentence, ts), ("targeted", targeted, tt)):
+                lo, hi, pv = bootstrap_gap(gr, base, lambda x, fn=fn, t=t: fn(x, t)[1], seeded(model, condition, "gap", name, g))
+                row |= {f"gap_{name}": fn(gr, t)[1] - fn(base, t)[1], f"gap_{name}_lo": lo, f"gap_{name}_hi": hi, f"gap_{name}_p": pv}
+            # does targeted shrink the gap? (sentence gap - targeted gap) = saved(group) - saved(France)
+            lo, hi, pv = bootstrap_gap(gr, base, saved, seeded(model, condition, "gap_change", g))
+            row |= {"gap_change": saved(gr) - saved(base), "gap_change_lo": lo, "gap_change_hi": hi, "gap_change_p": pv}
+        out.append(row)
+        f = lambda k: f"{row[k]:+.2f} [{row[k + '_lo']:+.2f},{row[k + '_hi']:+.2f}] p={row[k + '_p']:.3f}" if k in row else ""
+        print(f"{g:24s} {f('saved'):>34s}   {f('gap_sentence'):>34s}   {f('gap_targeted'):>34s}   {f('gap_change'):>34s}")
+    keys = list(out[-1])
+    return [{k: r.get(k, "") for k in keys} for r in out]
 
 
 def _self_check() -> None:
