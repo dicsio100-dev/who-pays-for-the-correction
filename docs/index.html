@@ -153,12 +153,12 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
       <div class="step"><b>Score below the line</b>“Sorry, could you repeat that?”</div>
     </div>
   </div>
-  <p>The line is set once, for everyone, so that no more than 5 % of calls go through with a mistake. It is the same rule for every caller. Does it cost every caller the same?</p>
+  <p>The line is set once, for everyone, on a first group of callers, so that about 5 % of calls go through with a mistake. It is the same rule for every caller. Does it cost every caller the same?</p>
 </section>
 
 <section aria-labelledby="f1">
   <p class="finding">Finding 1</p>
-  <h2 id="f1">Whisper makes about twice as many mistakes on Canadian and African French</h2>
+  <h2 id="f1">Whisper gets 1.5 to 1.9 times as many words wrong on Canadian and African French</h2>
   <p id="f1-text" class="muted"></p>
   <div class="card" id="c1">
     <div class="card-head">
@@ -270,7 +270,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 <footer>
   <div class="wrap">
     <p><b>Method.</b> Common Voice French 27.0, 50 speakers per accent group and 4 clips each, plus 30 speakers from OpenSLR 57 (Yaoundé). Speakers were split in half before any result was looked at: one half sets the line, the other half is where results are reported. Whisper large-v3 (through Groq) with the language set to French, text normalised the same way on both sides, word error rate with jiwer, 95 % ranges from 1,000 resamples of speakers. The phone line is a 300–3,400 Hz filter with the 8 kHz telephone codec G.711. No audio from the datasets is shared here, following the Common Voice terms. Code and full results: <a id="repo-link" href="#">GitHub</a>.</p>
-    <p><b>AI tools used.</b> Whisper large-v3 (OpenAI model, run by Groq), faster-whisper small and large-v3-turbo (run on my laptop), and Claude Code (Anthropic) to help write and check the analysis code.</p>
+    <p><b>AI tools used.</b> Whisper large-v3 (OpenAI model, run by Groq), faster-whisper small and large-v3-turbo (run on my laptop), and <a href="https://claude.com/claude-code">Claude Code</a> (Anthropic), which wrote much of the analysis code and drafted this page with me. I chose the question and listened to 20 clips to check the data and the errors.</p>
     <p><b>Sources</b></p>
     <ol>
       <li id="s1">Institut de la statistique du Québec, <a href="https://statistique.quebec.ca/fr/document/migrations-internationales-interprovinciales-quebec/tableau/immigrants-selon-le-pays-de-naissance-quebec">Immigrants selon le pays de naissance, Québec</a> (2024, provisional; data from the MIFI).</li>
@@ -455,7 +455,7 @@ function render(D) {
   document.getElementById("f3-text").textContent =
     `I ran this comparison ${cmp.length} ways: both African groups, normal audio and phone line, and with each half of the speakers taking its turn as the test half. ` +
     `African-accented callers were asked to repeat more in ${more} of ${cmp.length} (${Math.min(...gaps)} to ${Math.max(...gaps)} more calls out of 100). ` +
-    `Taken one by one, ${sure} of those ${cmp.length} gaps are large enough to rule out chance (p < 0.05); the others point the same way but are not proof on their own. ` +
+    `Taken one by one, ${sure} of those ${cmp.length} gaps are large enough to rule out chance (p < 0.05); the others point the same way but are not proof on their own, and the ${cmp.length} versions share speakers, so they are not ${cmp.length} separate proofs. ` +
     `Canada is not asked to repeat more. ` +
     `Why does the rule make so many people repeat? Whisper's sentence score is a weak alarm: it ranks a correctly heard sentence above a misheard one only ` +
     `${Math.round(100 * Math.min(...aucs))} to ${Math.round(100 * Math.max(...aucs))} % of the time (a coin flip would give 50 %). So to let fewer than 5 calls in 100 through with a mistake, the agent has to ask most callers to repeat.`;
@@ -528,9 +528,10 @@ function render(D) {
         `This needs a confidence score for each word, so it runs on Whisper large-v3-turbo on a laptop. ` +
         `Tuned to the same safety setting as before, every group says fewer words again: ${pct(lo, 0)} to ${pct(hi, 0)} fewer ` +
         `(France ${(+fS.words).toFixed(1)} to ${(+fT.words).toFixed(1)}, Sub-Saharan Africa ${(+aS.words).toFixed(1)} to ${(+aT.words).toFixed(1)}). ` +
-        `But the gap does not close: Sub-Saharan African callers still say ${(+af.gap_targeted).toFixed(1)} more words per call than France ` +
-        `(p ${pf(af.gap_targeted_p).replace(" ", " ")}), against ${(+af.gap_sentence).toFixed(1)} with whole-sentence repeats; the change is not significant (p ${pf(af.gap_change_p)}). ` +
-        `And at least ${pct(iLo, 0)} of calls now get a question. The fix makes the bill smaller for everyone. It does not make it fair.`;
+        `But the gap stays: Sub-Saharan African callers still say ${(+af.gap_targeted).toFixed(1)} more words per call than France ` +
+        `(p ${pf(af.gap_targeted_p).replace(" ", " ")}), against ${(+af.gap_sentence).toFixed(1)} with whole-sentence repeats. ` +
+        `How much the fix narrows the gap: between ${(+af.gap_change_lo).toFixed(1)} and +${(+af.gap_change_hi).toFixed(1)} words (95 % range), far from the ${(+af.gap_sentence).toFixed(1)} needed to close it. ` +
+        `And it asks almost every caller something: at least ${pct(iLo, 0)} of calls get a question. The fix makes the bill smaller for everyone. It does not make it fair.`;
     }
   }
 
