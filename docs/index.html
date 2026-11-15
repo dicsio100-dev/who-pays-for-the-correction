@@ -455,18 +455,19 @@ function render(D) {
   const gaps = cmp.map(r => Math.round(100 * r.repeat_gap));
   const aucs = order.map(g => S.phone_crossfit[g].auc);
   const FA = S.phone_crossfit, faP = Math.min(...cmp.map(r => r.false_alarm_gap_p)), faMore = cmp.filter(r => r.false_alarm_gap > 0).length;
-  // Rough split: the African group's own share of misheard sentences, but France's repeat rates on correct and misheard ones.
+  // Rough split (no range) of each repeat gap: more misheard sentences + misheard ones flagged more = the part that comes with mistakes.
   const catchRate = x => (x.repeat - (1 - x.misheard) * x.false_alarm) / x.misheard;
-  const errPart = african.flatMap(g => runs.map(k => { const F = S[k].france, G = S[k][g];
-    return 100 * (G.misheard * catchRate(F) + (1 - G.misheard) * F.false_alarm - F.repeat); }));
+  const errShare = african.flatMap(g => runs.map(k => { const F = S[k].france, G = S[k][g];
+    return (G.repeat - F.repeat - (1 - G.misheard) * (G.false_alarm - F.false_alarm)) / (G.repeat - F.repeat); }));
+  const PF = S.phone_crossfit;
   document.getElementById("f3-text").textContent =
-    `I ran this comparison ${cmp.length} ways: both African groups, normal audio and phone line, and with each half of the speakers taking its turn as the test half. ` +
+    `I ran this comparison ${cmp.length} ways: both African groups, normal audio and phone line, and on the test half only and on all speakers (halves swapped). ` +
     `African-accented callers were asked to repeat more in ${more} of ${cmp.length} (${Math.min(...gaps)} to ${Math.max(...gaps)} more calls out of 100). ` +
     `Taken one by one, ${sure} of those ${cmp.length} gaps are large enough to rule out chance (p < 0.05); the others point the same way but are not proof on their own, and the ${cmp.length} versions share speakers, so they are not ${cmp.length} separate proofs. ` +
     `Canada is not asked to repeat more. ` +
-    `Is that only because Whisper makes more mistakes for them? Not mainly: a rough split (without a range) puts only ${Math.round(Math.min(...errPart))} to ${Math.round(Math.max(...errPart))} of those points on the extra mistakes. The rest comes from lower confidence scores on African-accented speech, on correct and misheard sentences alike. ` +
-    `Among the sentences Whisper heard with no error, the rule still asked for a repeat ${pct(FA[cvAfrica].false_alarm, 0)} of the time for Sub-Saharan African callers, against ${pct(FA.france.false_alarm, 0)} for France (phone line, all speakers). African-accented callers were asked more in ${faMore} of ${cmp.length} versions, but no single gap is large enough to rule out chance (p ≥ ${(Math.floor(faP * 100) / 100).toFixed(2)}). ` +
-    `A hint, not a proof, that the same rule costs them more even when Whisper hears them right. ` +
+    `Is that because Whisper makes more mistakes for them? Mostly, these extra repeats are of sentences Whisper got wrong: more of their sentences are misheard, and the rule catches more of their misheard ones (${pct(catchRate(PF[cvAfrica]), 0)} against ${pct(catchRate(PF.france), 0)} on the phone line) because those score lower. A rough post-hoc split (no range) puts ${Math.round(100 * Math.min(...errShare))} to ${Math.round(100 * Math.max(...errShare))} % of the gap there (47 to 84 % when split in the other order). ` +
+    `On sentences Whisper heard right, its average score on the phone line is the same as for France. Yet among them, the rule still asked for a repeat ${pct(FA[cvAfrica].false_alarm, 0)} of the time for Sub-Saharan African callers, against ${pct(FA.france.false_alarm, 0)} for France (phone line, all speakers). African-accented callers were asked more in ${faMore} of ${cmp.length} versions, but no single gap is large enough to rule out chance (p ≥ ${(Math.floor(faP * 100) / 100).toFixed(2)}). ` +
+    `A hint, not a proof. ` +
     `Why does the rule make so many people repeat? Whisper's sentence score is a weak alarm: it ranks a correctly heard sentence above a misheard one only ` +
     `${Math.round(100 * Math.min(...aucs))} to ${Math.round(100 * Math.max(...aucs))} % of the time (a coin flip would give 50 %). So to keep mistakes near 5 calls in 100, the agent has to ask most callers to repeat.`;
 
@@ -540,9 +541,11 @@ function render(D) {
         `(France ${(+fS.words).toFixed(1)} to ${(+fT.words).toFixed(1)}, Sub-Saharan Africa ${(+aS.words).toFixed(1)} to ${(+aT.words).toFixed(1)}). ` +
         `But the gap stays: Sub-Saharan African callers still say ${num(af.gap_targeted, 2)} more words per call than France ` +
         `(p ${pf(af.gap_targeted_p).replace(" ", " ")}), about the same as the ${num(af.gap_sentence, 2)} with whole-sentence repeats. ` +
+        `About half a word of that is length: their sentences are longer (${num(af.sentence_words, 1)} words against ${num(f.sentence_words, 1)}); at France's sentence length the gap is ${num(af.gap_sentence_eqlen, 1)} before and ${num(af.gap_targeted_eqlen, 1)} after. ` +
         `How much the fix narrows the gap: between ${num(af.gap_change_lo, 1)} and +${num(af.gap_change_hi, 1)} words (95 % range), far from the ${num(af.gap_sentence, 1)} needed to close it. ` +
         (G.canada ? `For Canada the gap even grew, from ${num(G.canada.gap_sentence, 1)} to ${num(G.canada.gap_targeted, 1)} words (could be chance, p ${pf(G.canada.gap_change_p)}). ` : ``) +
-        `And it asks almost every caller something: at least ${pct(iLo, 0)} of calls get a question. The fix makes the bill smaller for everyone. It does not make it fair.`;
+        `And it asks almost every caller something: at least ${pct(iLo, 0)} of calls get a question. The fix makes the bill smaller for everyone. It does not make it fair. ` +
+        `Four more fixes were tried afterwards on the same recordings (FINDINGS, Result 7). Reading the sentence back ("I heard X, is that right?") instead of asking for a repeat cuts the words callers say again by 23 to 44 %, but it helps France most, so the gap in words grows (significantly only for Canada and Yaoundé). Choosing between two Whisper models cuts errors for every group without narrowing the gaps. None of them closes the gap.`;
     }
   }
 

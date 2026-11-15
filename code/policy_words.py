@@ -164,6 +164,15 @@ def gap_table(tune: list[dict], test: list[dict], groups: list[str], condition: 
             # does targeted shrink the gap? (sentence gap - targeted gap) = saved(group) - saved(France)
             lo, hi, pv = bootstrap_gap(gr, base, saved, seeded(model, condition, "gap_change", g))
             row |= {"gap_change": saved(gr) - saved(base), "gap_change_lo": lo, "gap_change_hi": hi, "gap_change_p": pv}
+            # added Sunday (post-hoc): sentences are not the same length in every group, so also give the gap
+            # per word spoken (share of the caller's words said again), shown in words at France's sentence length
+            fr_len = sum(r["ref_words"] for r in base) / len(base)
+            for name, fn, t in (("sentence", sentence, ts), ("targeted", targeted, tt)):
+                share = lambda x, fn=fn, t=t: fn(x, t)[1] / (sum(r["ref_words"] for r in x) / len(x))
+                lo, hi, pv = bootstrap_gap(gr, base, share, seeded(model, condition, "gap_eqlen", name, g))
+                row |= {f"gap_{name}_eqlen": (share(gr) - share(base)) * fr_len, f"gap_{name}_eqlen_lo": lo * fr_len,
+                        f"gap_{name}_eqlen_hi": hi * fr_len, f"gap_{name}_eqlen_p": pv}
+        row["sentence_words"] = sum(r["ref_words"] for r in gr) / len(gr)
         out.append(row)
         f = lambda k: f"{row[k]:+.2f} [{row[k + '_lo']:+.2f},{row[k + '_hi']:+.2f}] p={row[k + '_p']:.3f}" if k in row else ""
         print(f"{g:24s} {f('saved'):>34s}   {f('gap_sentence'):>34s}   {f('gap_targeted'):>34s}   {f('gap_change'):>34s}")

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-14",
+ "generated": "2026-11-15",
  "repo": "https://github.com/dicsio100-dev/who-pays-for-the-correction",
  "labels": {
   "france": "France",
@@ -49,7 +49,10 @@
     "false_alarm_gap": 0.0,
     "false_alarm_gap_lo": 0.0,
     "false_alarm_gap_hi": 0.0,
-    "false_alarm_gap_p": null
+    "false_alarm_gap_p": null,
+    "errors_per_misheard": 1.447,
+    "conf_correct": -0.169,
+    "conf_misheard": -0.207
    },
    "canada": {
     "speakers": 25.0,
@@ -85,7 +88,10 @@
     "false_alarm_gap": 0.054,
     "false_alarm_gap_lo": -0.117,
     "false_alarm_gap_hi": 0.238,
-    "false_alarm_gap_p": 0.582
+    "false_alarm_gap_p": 0.582,
+    "errors_per_misheard": 2.875,
+    "conf_correct": -0.176,
+    "conf_misheard": -0.259
    },
    "afrique_subsaharienne": {
     "speakers": 25.0,
@@ -121,7 +127,10 @@
     "false_alarm_gap": 0.137,
     "false_alarm_gap_lo": -0.079,
     "false_alarm_gap_hi": 0.315,
-    "false_alarm_gap_p": 0.196
+    "false_alarm_gap_p": 0.196,
+    "errors_per_misheard": 2.208,
+    "conf_correct": -0.198,
+    "conf_misheard": -0.236
    },
    "cameroun_yaounde": {
     "speakers": 15.0,
@@ -157,7 +166,10 @@
     "false_alarm_gap": 0.121,
     "false_alarm_gap_lo": -0.081,
     "false_alarm_gap_hi": 0.322,
-    "false_alarm_gap_p": 0.278
+    "false_alarm_gap_p": 0.278,
+    "errors_per_misheard": 2.321,
+    "conf_correct": -0.166,
+    "conf_misheard": -0.304
    }
   },
   "clean_crossfit": {
@@ -195,7 +207,10 @@
     "false_alarm_gap": 0.0,
     "false_alarm_gap_lo": 0.0,
     "false_alarm_gap_hi": 0.0,
-    "false_alarm_gap_p": null
+    "false_alarm_gap_p": null,
+    "errors_per_misheard": 1.813,
+    "conf_correct": -0.189,
+    "conf_misheard": -0.212
    },
    "canada": {
     "speakers": 50.0,
@@ -231,7 +246,10 @@
     "false_alarm_gap": -0.065,
     "false_alarm_gap_lo": -0.178,
     "false_alarm_gap_hi": 0.047,
-    "false_alarm_gap_p": 0.29
+    "false_alarm_gap_p": 0.29,
+    "errors_per_misheard": 2.75,
+    "conf_correct": -0.172,
+    "conf_misheard": -0.238
    },
    "afrique_subsaharienne": {
     "speakers": 50.0,
@@ -267,7 +285,10 @@
     "false_alarm_gap": 0.04,
     "false_alarm_gap_lo": -0.091,
     "false_alarm_gap_hi": 0.161,
-    "false_alarm_gap_p": 0.564
+    "false_alarm_gap_p": 0.564,
+    "errors_per_misheard": 2.214,
+    "conf_correct": -0.192,
+    "conf_misheard": -0.255
    },
    "cameroun_yaounde": {
     "speakers": 30.0,
@@ -303,7 +324,10 @@
     "false_alarm_gap": 0.021,
     "false_alarm_gap_lo": -0.126,
     "false_alarm_gap_hi": 0.162,
-    "false_alarm_gap_p": 0.726
+    "false_alarm_gap_p": 0.726,
+    "errors_per_misheard": 2.768,
+    "conf_correct": -0.165,
+    "conf_misheard": -0.303
    }
   },
   "phone_test": {
@@ -341,7 +365,10 @@
     "false_alarm_gap": 0.0,
     "false_alarm_gap_lo": 0.0,
     "false_alarm_gap_hi": 0.0,
-    "false_alarm_gap_p": null
+    "false_alarm_gap_p": null,
+    "errors_per_misheard": 1.73,
+    "conf_correct": -0.163,
+    "conf_misheard": -0.247
    },
    "canada": {
     "speakers": 25.0,
@@ -377,7 +404,10 @@
     "false_alarm_gap": -0.091,
     "false_alarm_gap_lo": -0.283,
     "false_alarm_gap_hi": 0.098,
-    "false_alarm_gap_p": 0.37
+    "false_alarm_gap_p": 0.37,
+    "errors_per_misheard": 2.83,
+    "conf_correct": -0.163,
+    "conf_misheard": -0.256
    },
    "afrique_subsaharienne": {
     "speakers": 25.0,
@@ -413,7 +443,10 @@
     "false_alarm_gap": 0.091,
     "false_alarm_gap_lo": -0.134,
     "false_alarm_gap_hi": 0.286,
-    "false_alarm_gap_p": 0.364
+    "false_alarm_gap_p": 0.364,
+    "errors_per_misheard": 2.613,
+    "conf_correct": -0.162,
+    "conf_misheard": -0.307
    },
    "cameroun_yaounde": {
     "speakers": 15.0,
@@ -449,7 +482,10 @@
     "false_alarm_gap": 0.114,
     "false_alarm_gap_lo": -0.073,
     "false_alarm_gap_hi": 0.327,
-    "false_alarm_gap_p": 0.25
+    "false_alarm_gap_p": 0.25,
+    "errors_per_misheard": 2.367,
+    "conf_correct": -0.161,
+    "conf_misheard": -0.321
    }
   },
   "phone_crossfit": {
@@ -487,7 +523,10 @@
     "false_alarm_gap": 0.0,
     "false_alarm_gap_lo": 0.0,
     "false_alarm_gap_hi": 0.0,
-    "false_alarm_gap_p": null
+    "false_alarm_gap_p": null,
+    "errors_per_misheard": 1.935,
+    "conf_correct": -0.188,
+    "conf_misheard": -0.239
    },
    "canada": {
     "speakers": 50.0,
@@ -523,7 +562,10 @@
     "false_alarm_gap": -0.101,
     "false_alarm_gap_lo": -0.233,
     "false_alarm_gap_hi": 0.016,
-    "false_alarm_gap_p": 0.108
+    "false_alarm_gap_p": 0.108,
+    "errors_per_misheard": 2.851,
+    "conf_correct": -0.162,
+    "conf_misheard": -0.255
    },
    "afrique_subsaharienne": {
     "speakers": 50.0,
@@ -559,7 +601,10 @@
     "false_alarm_gap": 0.079,
     "false_alarm_gap_lo": -0.06,
     "false_alarm_gap_hi": 0.218,
-    "false_alarm_gap_p": 0.268
+    "false_alarm_gap_p": 0.268,
+    "errors_per_misheard": 2.605,
+    "conf_correct": -0.185,
+    "conf_misheard": -0.296
    },
    "cameroun_yaounde": {
     "speakers": 30.0,
@@ -595,7 +640,10 @@
     "false_alarm_gap": 0.036,
     "false_alarm_gap_lo": -0.097,
     "false_alarm_gap_hi": 0.171,
-    "false_alarm_gap_p": 0.598
+    "false_alarm_gap_p": 0.598,
+    "errors_per_misheard": 2.871,
+    "conf_correct": -0.171,
+    "conf_misheard": -0.317
    }
   }
  },
@@ -2986,7 +3034,16 @@
    "gap_change": null,
    "gap_change_lo": null,
    "gap_change_hi": null,
-   "gap_change_p": null
+   "gap_change_p": null,
+   "gap_sentence_eqlen": null,
+   "gap_sentence_eqlen_lo": null,
+   "gap_sentence_eqlen_hi": null,
+   "gap_sentence_eqlen_p": null,
+   "gap_targeted_eqlen": null,
+   "gap_targeted_eqlen_lo": null,
+   "gap_targeted_eqlen_hi": null,
+   "gap_targeted_eqlen_p": null,
+   "sentence_words": 9.34
   },
   {
    "group": "canada",
@@ -3006,7 +3063,16 @@
    "gap_change": -0.6,
    "gap_change_lo": -1.45,
    "gap_change_hi": 0.33,
-   "gap_change_p": 0.23
+   "gap_change_p": 0.23,
+   "gap_sentence_eqlen": 0.977,
+   "gap_sentence_eqlen_lo": -0.317,
+   "gap_sentence_eqlen_hi": 2.314,
+   "gap_sentence_eqlen_p": 0.126,
+   "gap_targeted_eqlen": 1.639,
+   "gap_targeted_eqlen_lo": 0.716,
+   "gap_targeted_eqlen_hi": 2.547,
+   "gap_targeted_eqlen_p": 0.0,
+   "sentence_words": 9.71
   },
   {
    "group": "afrique_subsaharienne",
@@ -3026,7 +3092,16 @@
    "gap_change": 0.04,
    "gap_change_lo": -0.99,
    "gap_change_hi": 1.17,
-   "gap_change_p": 0.912
+   "gap_change_p": 0.912,
+   "gap_sentence_eqlen": 1.596,
+   "gap_sentence_eqlen_lo": 0.272,
+   "gap_sentence_eqlen_hi": 2.855,
+   "gap_sentence_eqlen_p": 0.014,
+   "gap_targeted_eqlen": 1.744,
+   "gap_targeted_eqlen_lo": 0.886,
+   "gap_targeted_eqlen_hi": 2.606,
+   "gap_targeted_eqlen_p": 0.0,
+   "sentence_words": 10.18
   },
   {
    "group": "cameroun_yaounde",
@@ -3046,7 +3121,16 @@
    "gap_change": 0.703,
    "gap_change_lo": -0.233,
    "gap_change_hi": 1.797,
-   "gap_change_p": 0.152
+   "gap_change_p": 0.152,
+   "gap_sentence_eqlen": 2.98,
+   "gap_sentence_eqlen_lo": 1.883,
+   "gap_sentence_eqlen_hi": 3.976,
+   "gap_sentence_eqlen_p": 0.0,
+   "gap_targeted_eqlen": 2.248,
+   "gap_targeted_eqlen_lo": 1.363,
+   "gap_targeted_eqlen_hi": 3.132,
+   "gap_targeted_eqlen_p": 0.0,
+   "sentence_words": 9.25
   }
  ]
 }

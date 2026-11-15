@@ -3,7 +3,7 @@
 **Track:** Languages
 **Team:** Haris Folas
 
-**In one sentence:** with one "please repeat" rule for every caller, African-accented callers were asked to repeat more often than callers from France in all 8 versions of the test (4 of them significant on their own), with a similar but unproven gap even when Whisper had heard them right; the two fixes I tested help, but neither closes the gap.
+**In one sentence:** with one "please repeat" rule for every caller, African-accented callers were asked to repeat more often than callers from France in all 8 versions of the test (4 of them significant on their own), mostly on sentences Whisper had actually got wrong, with a smaller, unproven gap even on sentences it heard right; none of the fixes I tested closes the gap.
 
 **Interactive results page:** https://dicsio100-dev.github.io/who-pays-for-the-correction/ · **Every number in detail:** [`FINDINGS.md`](FINDINGS.md)
 
@@ -17,7 +17,7 @@ A fairness check for a phone agent's "please repeat" rule. **In:** recordings wi
 
 ## What we added
 
-Started from suggested project 4.4.3 (speech recognition across accents). Added our own **question** (who is asked to repeat under the same rule: prior work names this burden but has not measured it on real speech, Choi & Choi 2025, Ethiraj & David 2026), our own **setting** (a simulated phone line, 300–3,400 Hz, 8 kHz G.711), a **second corpus** (30 speakers from Yaoundé, Cameroon, OpenSLR 57) and **two fixes**.
+Started from suggested project 4.4.3 (speech recognition across accents). Added our own **question** (who is asked to repeat under the same rule: prior work names this burden but has not measured it on real speech, Choi & Choi 2025, Ethiraj & David 2026), our own **setting** (a simulated phone line, 300–3,400 Hz, 8 kHz G.711), a **second corpus** (30 speakers from Yaoundé, Cameroon, OpenSLR 57) and **two fixes** (four more tried afterwards).
 
 ## How it works
 
@@ -30,13 +30,15 @@ Started from suggested project 4.4.3 (speech recognition across accents). Added 
 
 1. **Errors.** Whisper gets 1.5 to 1.7 times as many words wrong for Canadian (12.3 %) and Sub-Saharan African speakers (10.7 %) as for France (7.3 %) on normal audio (p = 0.006 and 0.028), as Nieto et al. found on podcasts (Interspeech 2026). The gap stays without sentences containing names and in the cleaner half of the recordings (smaller there for Sub-Saharan Africa).
 2. **Phone line.** It widens the gap for Common Voice's Sub-Saharan African speakers only: +3.9 points of errors against +0.7 for France (difference 3.2, 95 % range 1.2 to 5.3, p = 0.002), not for Canada (p = 0.43) or Yaoundé (p = 0.76).
-3. **Same rule, different bill (the weakest result).** On the phone line, the rule asks 87 % of Sub-Saharan African callers to repeat against 77 % for France (p = 0.052), and 89 % of Yaoundé callers (p = 0.008); Canadians are not asked more. All 8 versions (2 African groups × 2 audio types × 2 halves) point the same way, by 8 to 17 calls in 100, and 4 are significant on their own; they share speakers. Whisper's extra mistakes explain only about 1 to 4 of those points (a rough split, without a range); the rest comes from lower confidence scores on African-accented speech, on correct and misheard sentences alike. **Among sentences Whisper heard correctly**, they are still asked more in all 8 versions (80 % against 72 % on the phone line), but no gap is significant on its own (p ≥ 0.19): a hint, not a proof, that the rule costs them more at equal error.
+3. **Same rule, different bill (the weakest result).** On the phone line, the rule asks 87 % of Sub-Saharan African callers to repeat against 77 % for France (p = 0.052), and 89 % of Yaoundé callers (p = 0.008); Canadians are not asked more. All 8 versions (2 African groups × 2 audio types × test half or all speakers) point the same way, by 8 to 17 calls in 100, and 4 are significant on their own; they share speakers. Most of those extra repeats are of sentences Whisper got wrong: more of their sentences are misheard, and the rule catches more of their misheard ones (92 % against 84 % on the phone line) because those score lower (−0.30 against −0.24); a rough post-hoc split (no range) puts 56 to 89 % of the gap there (47 to 84 % when split in the other order). **Among sentences Whisper heard correctly**, average scores on the phone line are the same as for France (−0.185 against −0.188), yet they are still asked more in all 8 versions (80 % against 72 % on the phone line), with no gap significant on its own (p ≥ 0.19): a hint, not a proof.
 
 ![Callers asked to repeat at every setting](figures/repeats.svg)
 
 **Against the baseline:** the line is tuned so that 5 % of calls slip through on the speakers it is tuned on (6 to 8 % on the others; 13 % for Canada on the phone test half, a gap that could be chance). Never asking lets 49 % of calls through with a mistake; asking the same share at random (73 %) lets 13 % through; the rule lets 8 %. Whisper's score is a weak alarm (it ranks a correct sentence above a misheard one only 62 to 80 % of the time), so most callers are asked to repeat.
 
-**The two fixes.** Telling Whisper "this is French" (left to guess, it picked another language for 9 of 100 African-accented calls and 7 Canadian ones, against 2 for France) narrows the gap by 2.9 points for Canada (p = 0.012) and 1.3 for Sub-Saharan Africa (p = 0.058); results 1–3 use it. Confirming only the doubtful words (large-v3-turbo, test speakers) cuts the words re-said by 24 to 39 % in every group, but the Sub-Saharan African gap stays (+2.25 words per call before, +2.21 after; change −1.0 to +1.2) and grows for Canada (not significant), while 96–100 % of calls now get a question. Both help, with fewer errors or fewer words re-said; neither makes it fair.
+**The two fixes.** Telling Whisper "this is French" (left to guess, it picked another language for 9 of 100 African-accented calls and 7 Canadian ones, against 2 for France) narrows the gap by 2.9 points for Canada (p = 0.012) and 1.3 for Sub-Saharan Africa (p = 0.058); results 1–3 use it. Confirming only the doubtful words (large-v3-turbo, test speakers) cuts the words re-said by 24 to 39 % in every group, but the Sub-Saharan African gap stays (+2.25 words per call before, +2.21 after; change −1.0 to +1.2; about half a word of it is their longer sentences) and grows for Canada (not significant), while 96–100 % of calls now get a question. Both help, with fewer errors or fewer words re-said; neither makes it fair.
+
+**Four more fixes, tried afterwards** (phone line, same recordings, details in FINDINGS Result 7): reading the sentence back ("I heard X, is that right?") instead of asking for a repeat cuts the words callers re-say by 23 to 44 %, but helps France most, so the gap in words grows (Sub-Saharan Africa +1.7 → +2.4 per call, not significant; Canada and Yaoundé p ≈ 0.04, all speakers); a line that adapts to each caller evens things out only by asking France and Canada callers more; a second recognizer helps little, as an extra alarm or to choose between two transcripts (fewer errors for every group on the test half, no range, without narrowing the gaps); a line per accent is not usable by an agent that does not know the caller's accent. None closes the gap. One line does not give every group the same safety either: Yaoundé callers were asked the most yet had the fewest mistakes slip through (0.8 % against 6 %; a different corpus, so maybe the recordings).
 
 **Where it fails** (normal audio, word for word):
 
@@ -50,7 +52,7 @@ Names and numbers fail for every accent: Whisper gets 29 to 43 % of them wrong i
 
 ## What we'd do next
 
-Test on real calls (with permission) and separate African countries. Neither fix closes the gap, which points to the recognizer itself: more African-accented French in training data (Common Voice has 1,846 such clips out of 792,011). Not tested here.
+Test on real calls (with permission) and separate African countries. None of the six fixes closes the gap, which points to the recognizer itself: more African-accented French in training data (Common Voice has 1,846 such clips out of 792,011). Not tested here.
 
 ## Limits
 

@@ -31,6 +31,8 @@ Frozen on 2026-11-14 after switching to two-sided p-values and one fixed random 
   0.014 → 0.008). Both versions are reported below.
 - Added after the first look and reported whatever came out: key words only (Result 6), the repeat rule among
   correctly heard sentences and the error/score split (end of Result 3).
+- Added on Sunday, after a second outside review: the three-way split and mean scores (end of Result 3), the
+  sentence-length check for fix 2 (Result 5), and four more fixes (Result 7). All post-hoc.
 
 ## Data integrity (checks.py, analyze.py)
 
@@ -102,15 +104,25 @@ with NO error that the rule still asks to repeat (`false_alarm` in analyze.py), 
 
 All 8 African gaps positive (+2 to +14 per 100), none significant (38–102 correct sentences per group).
 
-Rough split of each repeat gap (point estimates, no range): give the African group France's repeat rates on correct
-and on misheard sentences, but its own share of misheard sentences. That part ("more errors") is only 0.8–4.1 of
-the 7.5–17 points; the rest comes from the rule asking more often on BOTH correct and misheard African sentences
-(lower confidence scores). Phone cross-fit, Sub-Saharan Africa: 10.0 = 2.2 + 7.8. Some of the second part may come
-from more errors per misheard sentence, so the split is uncertain both ways.
+Rough split of each repeat gap into three parts (point estimates, no range): (a) more misheard sentences (the African
+group's own share, France's repeat rates), (b) misheard sentences flagged more often, (c) correctly heard sentences
+asked more often. Phone cross-fit, Sub-Saharan Africa: 10.0 = 2.2 + 4.4 + 3.4. Across the 8 versions, (a) + (b), the
+part that comes with Whisper's mistakes, is 56 to 89 % of the gap (47 to 84 % when the split uses France's misheard
+share for (b) and (c) instead); (c) is 0.9 to 6.5 points.
+Why (b): African misheard sentences score lower (phone, all speakers: −0.30 against −0.24), so the line catches more
+of them (92 % against 84 %; the flip side is that 16 % of France's misheard sentences slip through, against 8 %).
+They also carry more wrong words (2.6 against 1.9), but that is not the reason: Canadian misheard sentences carry
+even more (2.9) and are caught less (80 %). On correctly heard sentences the average score on the phone line is the
+SAME (−0.185 against −0.188; on normal audio, test half, Africa's is lower, −0.198 against −0.169): (c) is not a
+lower average; it comes from fewer very confident correct sentences above the line, and it is not significant.
 
-Reading: we cannot show the rule treats correctly heard callers differently (no gap is significant), and we cannot
-show the extra repeats come only from extra mistakes either. Every point estimate says the same rule costs
-African-accented callers more even at equal error: a hint, not a proof.
+Correction (Sunday): Saturday's two-way split put (b) and (c) together as "lower confidence scores" and read it as
+"only 1 to 4 points come from extra mistakes". That over-read the split: (b) is misheard sentences, so those repeats
+come with real mistakes; they are caught more because they score lower, not because the mistakes are bigger.
+
+Reading: most of the extra repeats come with Whisper's mistakes (more of them, and more of them caught): the rule
+turns the recognizer's accent gap into callers' time. Among correctly heard sentences the gap points the same way in all 8
+versions but is not significant in any: a hint, not a proof.
 
 ## Result 4 — Fix 1: telling Whisper the language narrows the gap (language_hint.py)
 
@@ -147,6 +159,12 @@ All savings p < 0.002 (no resample crossed zero). Gap with France in words re-sa
 | Sub-Saharan Africa | +2.25 [+0.82, +3.74] p = 0.002 | +2.21 [+1.24, +3.22] p < 0.002 | +0.04 [−0.99, +1.17] p = 0.91 |
 | Yaoundé | +2.90 [+1.47, +4.37] p < 0.002 | +2.19 [+1.17, +3.19] p < 0.002 | +0.70 [−0.23, +1.80] p = 0.15 |
 
+Sentence length (added Sunday): sentences are not the same length in every group (test half: France 9.3 words,
+Sub-Saharan Africa 10.2, Canada 9.7, Yaoundé 9.3), and a longer sentence costs more words to repeat. Per word spoken,
+shown in words at France's sentence length, the Sub-Saharan African gap is +1.60 (p = 0.014) with whole-sentence
+repeats and +1.74 (p < 0.002) with targeted confirmation; Canada +0.98 (p = 0.126) and +1.64 (p < 0.002); Yaoundé
++2.98 and +2.25 (both p < 0.002). About half a word of the African gap above is length; the conclusion is unchanged.
+
 Reading: targeted confirmation cuts the words callers say again by a quarter to 40 % in every group, but the gap
 with France stays the same size (no change is significant). It also turns most calls into at least one question
 (96–100 %): it asks for less, but asks almost everyone. The fix lowers the bill; it does not make it fair. This
@@ -179,6 +197,42 @@ Re-running the repeat rule with "a key word is wrong" as the error to catch (cro
 about a third of names and numbers wrong whoever speaks; the group gap is not resolvable on 66–75 clips. A phone
 agent should confirm names for every caller.
 
+## Result 7 — Four more fixes tried on Sunday (fixes.py, post-hoc, phone line only, no new audio)
+
+Same rule set-up: accent-blind, settings and line fitted on tune speakers (all groups pooled) for slip <= 5 %, judged
+on the other half and cross-fitted. Words re-said assume, as before, that what is said again is heard right.
+
+- **Read the sentence back** ("I heard X, is that right?") instead of asking for a repeat: the caller says one word
+  if it was right, one word plus the sentence if it was wrong. Same calls checked, so same safety. Words re-said per
+  call, all speakers: France 6.74 → 3.80 (−44 %), Canada 6.27 → 4.31 (−31 %), Sub-Saharan Africa 8.44 → 6.17 (−27 %),
+  Yaoundé 7.67 → 5.92 (−23 %). The Sub-Saharan African gap with France does not shrink (+1.70 → +2.37 words; change
+  not significant, p = 0.24): once false alarms cost one word, what is left is the error-rate gap. It also widens
+  the gap for Canada (−0.47 → +0.51 words, change p = 0.036) and Yaoundé (+0.94 → +2.12, p = 0.038) on all speakers,
+  not on the test half (p ≥ 0.24): it helps France most. Optimistic: it
+  assumes the caller notices every wrong read-back (a homophone read back sounds right), and it does not count the
+  time spent listening to the read-back.
+- **A line that adapts to each caller** (the score minus the mean score of the same caller's other sentences, an
+  accent-blind way to correct a caller-level shift): tuning picks no adaptation. Forced, it evens checks out only by
+  asking France and Canada callers more (France 77 % → 86 % at half strength, 92 % at full; Canada 70 → 80 → 88 %;
+  Africa 87 → 89 → 88 %; Yaoundé 89 → 83 → 83 %). It also uses the
+  caller's later sentences, so it is optimistic for a caller's first sentence.
+- **Two recognisers** (large-v3 and turbo): a bonus when both write the same text, or a small logistic-regression
+  alarm on accent-blind features (both scores, agreement, weakest word, length, no-speech probability): neither
+  shrinks the checks gap (Africa +8 and +11 points with them, against +10). Choosing between the two transcripts
+  (keep turbo's when it is clearly surer) cuts word errors for every group on the test half (France 6.9 → 5.5 %,
+  Canada 13.7 → 13.3 %, Africa 15.9 → 14.4 %, Yaoundé 12.8 → 9.9 %; no range) without narrowing the gaps with
+  France (Canada 6.8 → 7.8 points, Africa 9.0 → 8.9, Yaoundé 5.9 → 4.4).
+- **Same line, same safety?** Under one line, Yaoundé callers are asked the most yet have the fewest mistakes slip
+  through (0.8 % against 6.0 % for France, all speakers, gap −5.2 points [−9.2, −1.3]); Canada 9.5 % (p = 0.22),
+  Africa 4.5 % (p = 0.63). Yaoundé is a different corpus, so this may be the recording set-up, not the accent.
+  A separate line per group (label-aware, so not usable by an agent that does not know the caller's accent) evens
+  checks out on paper (81 / 84 / 84 / 80 %), but it lets more Yaoundé mistakes through (6.7 %), and its gaps
+  (Africa +3.5 points [−6, +13], p = 0.57) are too uncertain with 25 speakers per half to show the gap closes. Not a
+  finding.
+
+Reading: none of the agent-side fixes closes the gap with France. Reading back is the cheapest change for every
+caller. Fixing the gap itself points back to the recognizer.
+
 ## Limits to state on the page
 
 - 50 speakers per group (25 in each half): error-rate gaps of about 3 points are resolvable (3.4, p = 0.028), repeat
@@ -187,7 +241,8 @@ agent should confirm names for every caller.
 - Whisper's training data is not public, so it may include some Common Voice or OpenSLR recordings.
 - Accent = self-declared variant; "Africa" pools many countries. Common Voice is read Wikipedia text, not calls.
 - Simulated phone line, not real calls. The agent rule assumes a repeated sentence is then heard correctly.
-- Many comparisons are reported; a single p near 0.05 is a hint, not a proof.
+- Many comparisons are reported; a single p near 0.05 is a hint, not a proof. Result 7 alone adds more than a hundred
+  post-hoc comparisons; a few p below 0.05 there are expected by chance.
 
 ## Sources checked
 

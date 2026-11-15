@@ -194,7 +194,11 @@ def report(condition: str, crossfit: bool = False) -> list[dict]:
                       "conf": mean_conf(gr), "conf_gap": mean_conf(gr) - mean_conf(base), "conf_gap_lo": cg[0],
                       "conf_gap_hi": cg[1], "conf_gap_p": cg[2], "repeat_ratio": rep / repeat_share(base),
                       "false_alarm": false_alarm(gr), "false_alarm_gap": false_alarm(gr) - false_alarm(base),
-                      "false_alarm_gap_lo": fg[0], "false_alarm_gap_hi": fg[1], "false_alarm_gap_p": fg[2]})
+                      "false_alarm_gap_lo": fg[0], "false_alarm_gap_hi": fg[1], "false_alarm_gap_p": fg[2],
+                      # added Sunday (post-hoc): is the gap about bigger mistakes or about scores on correct sentences?
+                      "errors_per_misheard": sum(r["errors"] for r in gr if r["misheard"]) / max(1, sum(r["misheard"] for r in gr)),
+                      "conf_correct": mean_conf([r for r in gr if not r["misheard"]]),
+                      "conf_misheard": mean_conf([r for r in gr if r["misheard"]])})
         print(f"{g:24s} {len(by_speaker(gr)):4d} {wer(gr):6.1%} [{w_lo:.1%}-{w_hi:.1%}] "
               f"{table[-1]['wer_gap']:+6.1%} [{wg[0]:+.1%} {wg[1]:+.1%}] p={wg[2]:.3f} "
               f"{rep:6.1%} [{r_lo:.0%}-{r_hi:.0%}] {table[-1]['repeat_gap']:+6.1%} [{rg[0]:+.0%} {rg[1]:+.0%}] p={rg[2]:.3f} "
