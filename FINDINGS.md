@@ -35,7 +35,9 @@ Frozen on 2026-11-14 after switching to two-sided p-values and one fixed random 
 - Common Voice 27.0 French validated clips: 792,011 in total; Sub-Saharan Africa 1,846 (0.23 %, 84 speakers),
   France 505,272 (63.8 %), Canada 12,893 (1.6 %), no variant 244,265 (30.8 %). Counted from `validated.tsv`.
 
-## Result 1 — Whisper makes 1.5 to 1.9 times as many errors for Canadian and African French (solid)
+## Result 1 — Whisper makes 1.5 to 1.8 times as many errors for Canadian and African French (solid)
+
+Ratios to France, all speakers: clean Canada 1.70, Africa 1.47; phone Canada 1.72, Africa 1.84.
 
 Word error rate, all speakers:
 

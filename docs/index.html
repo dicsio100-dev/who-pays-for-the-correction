@@ -158,7 +158,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 
 <section aria-labelledby="f1">
   <p class="finding">Finding 1</p>
-  <h2 id="f1">Whisper gets 1.5 to 1.9 times as many words wrong on Canadian and African French</h2>
+  <h2 id="f1">Whisper gets 1.5 to 1.8 times as many words wrong on Canadian and African French</h2>
   <p id="f1-text" class="muted"></p>
   <div class="card" id="c1">
     <div class="card-head">
@@ -247,7 +247,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 <section aria-labelledby="limits">
   <h2 id="limits">What this does not show</h2>
   <ul class="checks">
-    <li>Each group has 50 speakers (25 in the test half). That is enough to see a gap of about 5 points, not smaller ones.</li>
+    <li>Each Common Voice group has 50 speakers (25 in the test half), Yaoundé 30 (15). That is enough to see a gap of about 5 points, not smaller ones.</li>
     <li>“Sub-Saharan Africa” is what speakers chose in Common Voice. It pools many countries and accents.</li>
     <li>People read Wikipedia sentences. They were not making real calls, and the phone line is simulated.</li>
     <li>I assume a repeated sentence is then heard correctly. Real callers who repeat may be misheard again.</li>
@@ -259,7 +259,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
   <h2 id="next">What a business should do before going live</h2>
   <ul class="checks">
     <li>Measure how often each accent you serve is asked to repeat, not only the average error rate.</li>
-    <li>Test on phone-quality audio. The gap I found grows on the phone line.</li>
+    <li>Test on phone-quality audio. For Sub-Saharan African speakers, the gap grew on the phone line.</li>
     <li>Tell the recognizer the language, and confirm only the doubtful words instead of the whole sentence. Both help every caller; neither closes the gap on its own.</li>
     <li>Always confirm names, whoever calls.</li>
   </ul>
@@ -270,7 +270,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 <footer>
   <div class="wrap">
     <p><b>Method.</b> Common Voice French 27.0, 50 speakers per accent group and 4 clips each, plus 30 speakers from OpenSLR 57 (Yaoundé). Speakers were split in half before any result was looked at: one half sets the line, the other half is where results are reported. Whisper large-v3 (through Groq) with the language set to French, text normalised the same way on both sides, word error rate with jiwer, 95 % ranges from 1,000 resamples of speakers. The phone line is a 300–3,400 Hz filter with the 8 kHz telephone codec G.711. No audio from the datasets is shared here, following the Common Voice terms. Code and full results: <a id="repo-link" href="#">GitHub</a>.</p>
-    <p><b>AI tools used.</b> Whisper large-v3 (OpenAI model, run by Groq), faster-whisper small and large-v3-turbo (run on my laptop), and <a href="https://claude.com/claude-code">Claude Code</a> (Anthropic), which wrote much of the analysis code and drafted this page with me. I chose the question and listened to 20 clips to check the data and the errors.</p>
+    <p><b>AI tools used.</b> Whisper large-v3 (OpenAI model, run by Groq), faster-whisper small and large-v3-turbo (run on my laptop), and <a href="https://claude.com/claude-code">Claude Code</a> (Anthropic), as a coding and writing assistant for the analysis code and this page. I chose the question, which comes from my own work building phone agents, and listened to 20 clips to check the data and the errors.</p>
     <p><b>Sources</b></p>
     <ol>
       <li id="s1">Institut de la statistique du Québec, <a href="https://statistique.quebec.ca/fr/document/migrations-internationales-interprovinciales-quebec/tableau/immigrants-selon-le-pays-de-naissance-quebec">Immigrants selon le pays de naissance, Québec</a> (2024, provisional; data from the MIFI).</li>

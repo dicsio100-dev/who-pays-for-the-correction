@@ -68,7 +68,7 @@ Started from suggested project 4.4.3 (speech recognition across accents). Added:
 - Institut de la statistique du Québec, immigrants by country of birth (2024p): https://statistique.quebec.ca/fr/document/migrations-internationales-interprovinciales-quebec/tableau/immigrants-selon-le-pays-de-naissance-quebec
 - OIF, *La langue française dans le monde 2022*, synthesis p. 7: https://www.francophonie.org/sites/default/files/2022-03/Synthese_La_langue_francaise_dans_le_monde_2022.pdf
 - Prior work on repair burden: Choi & Choi 2025 (https://arxiv.org/abs/2508.07143), Ethiraj & David 2026 (https://arxiv.org/abs/2609.04206); targeted clarification in dialogue systems (Stoyanchev et al., SIGDIAL 2013–2014).
-- **AI tools used:** Claude Code (Anthropic, https://claude.com/claude-code) wrote much of the analysis code and drafted this write-up with me; I chose the question and listened to 20 clips to check the data and the errors. Whisper models as listed above.
+- **AI tools used:** Claude Code (Anthropic, https://claude.com/claude-code), as a coding and writing assistant for the analysis code and this write-up. I chose the question, which comes from my own work building phone agents, and listened to 20 clips to check the data and the errors. Whisper models as listed above.
 
 ## Run it yourself
 
