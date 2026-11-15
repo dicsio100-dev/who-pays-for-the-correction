@@ -38,6 +38,12 @@ def load_thresholds() -> tuple[str, dict[str, float]]:
         if path.exists():
             with open(path, encoding="utf-8", newline="") as f:
                 return model, {r["policy"]: float(r["threshold"]) for r in csv.DictReader(f)}
+    published = HERE.parent / "docs" / "data.json"  # public repo: no results/ folder, use the page's thresholds
+    if published.exists():
+        rows = json.loads(published.read_text(encoding="utf-8")).get("targeted", [])
+        if rows:
+            # shortcut: data.json rounds thresholds to 3 decimals, so a clip right on the line may flip
+            return "turbo", {r["policy"]: float(r["threshold"]) for r in rows}
     raise SystemExit("no results/policy_phone_<model>.csv: run `python policy_words.py phone turbo` (or small) first")
 
 

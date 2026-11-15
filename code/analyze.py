@@ -157,6 +157,12 @@ def slip_share(rows: list[dict]) -> float:
     return sum(r["conf"] >= r["t"] and r["misheard"] for r in rows) / len(rows)
 
 
+def false_alarm(rows: list[dict]) -> float:
+    """Among clips Whisper heard with no error, the share the rule still asks to repeat: the cost at equal error."""
+    ok = [r for r in rows if not r["misheard"]]
+    return sum(r["conf"] < r["t"] for r in ok) / len(ok) if ok else float("nan")
+
+
 def report(condition: str, crossfit: bool = False) -> list[dict]:
     rows, how = decisions(load(condition), crossfit)
     groups = [g for g in GROUP_ORDER if any(r["group"] == g for r in rows)]
@@ -175,6 +181,7 @@ def report(condition: str, crossfit: bool = False) -> list[dict]:
         rg = bootstrap_gap(gr, base, repeat_share, seeded(*key, "repeat_gap")) if g != groups[0] else nan3
         sg = bootstrap_gap(gr, base, slip_share, seeded(*key, "slip_gap")) if g != groups[0] else nan3
         cg = bootstrap_gap(gr, base, mean_conf, seeded(*key, "conf_gap")) if g != groups[0] else nan3
+        fg = bootstrap_gap(gr, base, false_alarm, seeded(*key, "false_alarm_gap")) if g != groups[0] else nan3
         rep = repeat_share(gr)
         table.append({"condition": condition, "crossfit": crossfit, "group": g, "speakers": len(by_speaker(gr)),
                       "clips": len(gr), "wer": wer(gr), "wer_lo": w_lo, "wer_hi": w_hi,
@@ -185,7 +192,9 @@ def report(condition: str, crossfit: bool = False) -> list[dict]:
                       "slip_gap": slip_share(gr) - slip_share(base), "slip_gap_lo": sg[0], "slip_gap_hi": sg[1], "slip_gap_p": sg[2],
                       "auc": auc(gr), "misheard": sum(r["misheard"] for r in gr) / len(gr),
                       "conf": mean_conf(gr), "conf_gap": mean_conf(gr) - mean_conf(base), "conf_gap_lo": cg[0],
-                      "conf_gap_hi": cg[1], "conf_gap_p": cg[2], "repeat_ratio": rep / repeat_share(base)})
+                      "conf_gap_hi": cg[1], "conf_gap_p": cg[2], "repeat_ratio": rep / repeat_share(base),
+                      "false_alarm": false_alarm(gr), "false_alarm_gap": false_alarm(gr) - false_alarm(base),
+                      "false_alarm_gap_lo": fg[0], "false_alarm_gap_hi": fg[1], "false_alarm_gap_p": fg[2]})
         print(f"{g:24s} {len(by_speaker(gr)):4d} {wer(gr):6.1%} [{w_lo:.1%}-{w_hi:.1%}] "
               f"{table[-1]['wer_gap']:+6.1%} [{wg[0]:+.1%} {wg[1]:+.1%}] p={wg[2]:.3f} "
               f"{rep:6.1%} [{r_lo:.0%}-{r_hi:.0%}] {table[-1]['repeat_gap']:+6.1%} [{rg[0]:+.0%} {rg[1]:+.0%}] p={rg[2]:.3f} "
@@ -197,6 +206,7 @@ def _self_check() -> None:
     rows = [{"conf": c, "misheard": m} for c, m in [(-0.1, False), (-0.2, True), (-0.5, True), (-0.9, False)]]
     assert policy(rows, -0.3) == (0.5, 0.25)          # two below t, one accepted error
     assert auc(rows) == 0.5                           # correct -0.1 beats both misheard (-0.2, -0.5), correct -0.9 beats neither: 2 of 4
+    assert false_alarm([r | {"t": -0.3} for r in rows]) == 0.5  # of the two correct clips, only -0.9 is asked to repeat
     assert choose_threshold(rows) == -0.1 or policy(rows, choose_threshold(rows))[1] <= TARGET
 
 

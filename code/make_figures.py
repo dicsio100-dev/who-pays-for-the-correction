@@ -1,4 +1,4 @@
-"""Static SVG figures for the README (GitHub cannot run the interactive page), drawn from site/data.json.
+"""Static SVG figures for the README (GitHub cannot run the interactive page), drawn from docs/data.json.
 
   figures/wer.svg      word error rate per accent, normal audio vs phone line, with 95 % ranges
   figures/repeats.svg  share of test callers asked to repeat at every setting of the rule (phone line)
@@ -77,7 +77,7 @@ def repeats_figure(d: dict) -> str:
 
 
 def main() -> None:
-    d = json.loads((ROOT / "site" / "data.json").read_text(encoding="utf-8"))
+    d = json.loads((ROOT / "docs" / "data.json").read_text(encoding="utf-8"))
     out = ROOT / "figures"
     out.mkdir(exist_ok=True)
     (out / "wer.svg").write_text(wer_figure(d), encoding="utf-8")

@@ -1,4 +1,4 @@
-"""Export the numbers the explanation page shows into site/data.json (aggregates only, no audio,
+"""Export the numbers the explanation page shows into docs/data.json (aggregates only, no audio,
 no speaker IDs: Common Voice terms forbid re-sharing the dataset and identifying speakers).
 
 Every number on the page comes from this file, so page and analysis cannot drift apart.
@@ -16,7 +16,7 @@ import checks
 from analyze import GROUP_ORDER, choose_threshold, load, phone_widening, policy
 from common import RESULTS
 
-SITE = Path(__file__).resolve().parent.parent / "site"
+SITE = Path(__file__).resolve().parent.parent / "docs"
 LABELS = {"france": "France", "canada": "Canada", "afrique_subsaharienne": "Sub-Saharan Africa",
           "cameroun_yaounde": "Cameroon (Yaoundé)"}
 TARGETS = [round(x / 100, 2) for x in range(1, 31)]

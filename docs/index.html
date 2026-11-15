@@ -123,7 +123,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
   <div class="wrap">
     <p class="kicker">Veritas AI International High School Hackathon 2026 · AI + Languages</p>
     <h1>Who pays for the correction?</h1>
-    <p class="lede">AI phone agents ask callers to repeat themselves when they are not sure what they heard. I measured who gets asked. The same safety rule makes callers with some French accents repeat themselves more often than others.</p>
+    <p class="lede">AI phone agents ask callers to repeat themselves when they are not sure what they heard. I measured who gets asked. The same safety rule asked callers with some French accents to repeat more often than others.</p>
     <p class="byline">By Haris Folas. Born in Cameroon, now in Canada, where I build AI phone agents for small businesses.</p>
   </div>
 </header>
@@ -153,12 +153,12 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
       <div class="step"><b>Score below the line</b>“Sorry, could you repeat that?”</div>
     </div>
   </div>
-  <p>The line is set once, for everyone, on a first group of callers, so that about 5 % of calls go through with a mistake. It is the same rule for every caller. Does it cost every caller the same?</p>
+  <p>The line is set once, for everyone, on a first group of callers, so that 5 % of their calls go through with a mistake (on new callers it was 8 %). It is the same rule for every caller. Does it cost every caller the same?</p>
 </section>
 
 <section aria-labelledby="f1">
   <p class="finding">Finding 1</p>
-  <h2 id="f1">Whisper gets 1.5 to 1.8 times as many words wrong on Canadian and African French</h2>
+  <h2 id="f1">Whisper gets 1.5 to 1.8 times as many words wrong on Canadian and Sub-Saharan African French</h2>
   <p id="f1-text" class="muted"></p>
   <div class="card" id="c1">
     <div class="card-head">
@@ -176,7 +176,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 
 <section aria-labelledby="f2">
   <p class="finding">Finding 2</p>
-  <h2 id="f2">A phone line hurts African-accented French more</h2>
+  <h2 id="f2">A phone line widens the gap for Sub-Saharan African speakers</h2>
   <p id="f2-text" class="muted"></p>
   <div class="card" id="c2">
     <div class="card-head"><span class="card-title">Word error rate: normal audio → phone line, all speakers</span></div>
@@ -228,14 +228,14 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 
 <section aria-labelledby="fail">
   <h2 id="fail">Where it fails</h2>
-  <p class="muted">Real examples from the test speakers: what the person read, next to what Whisper wrote.</p>
+  <p class="muted">Real examples, normal audio: what the person read, next to what Whisper wrote, word for word.</p>
   <div class="examples">
-    <div class="ex"><div class="row"><span>Read</span><span>Zengi retourne alors assiéger Homs.</span><span>Whisper</span><span><mark>Réalisé par neo035</mark></span></div>
-      <p>A hallucination: Whisper invented a video-credit line, a phrase common in its training subtitles. It happened once in 1,440 transcriptions. On a phone line, an invented sentence is worse than a wrong word.</p></div>
-    <div class="ex"><div class="row"><span>Read</span><span>Il ne s’agit que d’une ruse de Kestutis pour gagner du temps.</span><span>Whisper</span><span>Il ne s’agit que d’une ruse <mark>mais qu’est-ce que tu utilises</mark> pour gagner du temps.</span></div>
-      <p>Rare names break it for every accent. Common Voice sentences come from Wikipedia and are full of them, which is why I also checked the results without any sentence that contains a name.</p></div>
-    <div class="ex"><div class="row"><span>Read</span><span>L’oiseau le plus lent.</span><span>Whisper</span><span><mark>Loiseau de poulain.</mark></span></div>
-      <p>A short sentence leaves Whisper no context to recover from one unclear sound. Callers giving a name or a street number are in exactly this situation.</p></div>
+    <div class="ex"><div class="row"><span>Read</span><span>Zengi retourne alors assiéger Homs.</span><span>Whisper</span><span><mark>Réalisé par Neo035</mark></span></div>
+      <p>Speaker from Sub-Saharan Africa. A hallucination: Whisper invented a video-credit line, a phrase common in its training subtitles. It happened once in 1,440 transcriptions. On a phone line, an invented sentence is worse than a wrong word.</p></div>
+    <div class="ex"><div class="row"><span>Read</span><span>En fait, il ne s’agit que d’une ruse de Kęstutis pour gagner du temps.</span><span>Whisper</span><span>En fait, il ne s'agit que d'une ruse<mark>, mais qu'est-ce que tu utilises</mark> pour gagner du temps ?</span></div>
+      <p>Speaker from France. Rare names break it for every accent. Common Voice sentences come from Wikipedia and are full of them, which is why I also checked the results without any sentence that contains a name.</p></div>
+    <div class="ex"><div class="row"><span>Read</span><span>L’oiseau le plus lent.</span><span>Whisper</span><span><mark>Loiseau de Poulain</mark></span></div>
+      <p>Speaker from Sub-Saharan Africa. A short sentence leaves Whisper no context to recover from one unclear sound. Callers giving a name or a street number are in exactly this situation.</p></div>
   </div>
 </section>
 
@@ -247,10 +247,12 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 <section aria-labelledby="limits">
   <h2 id="limits">What this does not show</h2>
   <ul class="checks">
-    <li>Each Common Voice group has 50 speakers (25 in the test half), Yaoundé 30 (15). That is enough to see a gap of about 5 points, not smaller ones.</li>
+    <li>Each Common Voice group has 50 speakers (25 in the test half), Yaoundé 30 (15). That is enough to see error-rate gaps of about 3 points, but a gap in how often callers are asked to repeat must be about 10 points to stand out.</li>
     <li>“Sub-Saharan Africa” is what speakers chose in Common Voice. It pools many countries and accents.</li>
     <li>People read Wikipedia sentences. They were not making real calls, and the phone line is simulated.</li>
     <li>I assume a repeated sentence is then heard correctly. Real callers who repeat may be misheard again.</li>
+    <li>Whisper's training data is not public, so it may already have heard some of these recordings. That cannot be checked here.</li>
+    <li>The 95 % ranges for the repeat rule keep its line fixed. Choosing the line again in every resample would make them a little wider.</li>
     <li>I report several comparisons. A result with p around 0.03 on one of them is a strong hint, not a proof.</li>
   </ul>
 </section>
@@ -260,7 +262,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
   <ul class="checks">
     <li>Measure how often each accent you serve is asked to repeat, not only the average error rate.</li>
     <li>Test on phone-quality audio. For Sub-Saharan African speakers, the gap grew on the phone line.</li>
-    <li>Tell the recognizer the language, and confirm only the doubtful words instead of the whole sentence. Both help every caller; neither closes the gap on its own.</li>
+    <li>Tell the recognizer the language, and confirm only the doubtful words instead of the whole sentence. Both help; neither closes the gap on its own.</li>
     <li>Always confirm names, whoever calls.</li>
   </ul>
 </section>
@@ -269,14 +271,14 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 
 <footer>
   <div class="wrap">
-    <p><b>Method.</b> Common Voice French 27.0, 50 speakers per accent group and 4 clips each, plus 30 speakers from OpenSLR 57 (Yaoundé). Speakers were split in half before any result was looked at: one half sets the line, the other half is where results are reported. Whisper large-v3 (through Groq) with the language set to French, text normalised the same way on both sides, word error rate with jiwer, 95 % ranges from 1,000 resamples of speakers. The phone line is a 300–3,400 Hz filter with the 8 kHz telephone codec G.711. No audio from the datasets is shared here, following the Common Voice terms. Code and full results: <a id="repo-link" href="#">GitHub</a>.</p>
+    <p><b>Method.</b> Common Voice French 27.0, 50 speakers per accent group and 4 clips each, plus 30 speakers from OpenSLR 57 (Yaoundé). Speakers were split in half before any result was looked at: one half sets the line and the other half judges it, then the halves swap. Error rates use every speaker, since nothing is tuned for them. Whisper large-v3 (through Groq) with the language set to French, text normalised the same way on both sides, word error rate with jiwer, 95 % ranges from 1,000 resamples of speakers. The phone line is a 300–3,400 Hz filter with the 8 kHz telephone codec G.711. No audio from the datasets is shared here, following the Common Voice terms. Code and full results: <a id="repo-link" href="#">GitHub</a>.</p>
     <p><b>AI tools used.</b> Whisper large-v3 (OpenAI model, run by Groq), faster-whisper small and large-v3-turbo (run on my laptop), and <a href="https://claude.com/claude-code">Claude Code</a> (Anthropic), as a coding and writing assistant for the analysis code and this page. I chose the question, which comes from my own work building phone agents, and listened to 20 clips to check the data and the errors.</p>
     <p><b>Sources</b></p>
     <ol>
       <li id="s1">Institut de la statistique du Québec, <a href="https://statistique.quebec.ca/fr/document/migrations-internationales-interprovinciales-quebec/tableau/immigrants-selon-le-pays-de-naissance-quebec">Immigrants selon le pays de naissance, Québec</a> (2024, provisional; data from the MIFI).</li>
       <li id="s2">Organisation internationale de la Francophonie, <a href="https://www.francophonie.org/sites/default/files/2022-03/Synthese_La_langue_francaise_dans_le_monde_2022.pdf"><i>La langue française dans le monde 2022</i>, synthesis</a>, p. 7: daily French speakers by region.</li>
       <li id="s3"><a href="https://mozilladatacollective.com/datasets/cmu5kub4600pkmh078n7n5ogl">Common Voice Scripted Speech 27.0 – French</a>, Mozilla Data Collective (CC0, not redistributed).</li>
-      <li><a href="https://www.openslr.org/57/">OpenSLR 57, African Accented French</a>.</li>
+      <li><a href="https://www.openslr.org/57/">OpenSLR 57, African Accented French</a> (Apache 2.0).</li>
       <li>Nieto, Angelika-Nikita, Sarkis &amp; Yang, <a href="https://www.isca-archive.org/interspeech_2026/nieto26_interspeech.pdf">Dialect Bias in Speech Recognition Across 10 Spanish and French Varieties</a>, Interspeech 2026.</li>
     </ol>
     <p class="small" id="generated"></p>
@@ -288,7 +290,7 @@ footer ol { padding-left: 20px; } footer li { margin-bottom: 6px; }
 <script>
 const pct = (x, d = 1) => (100 * x).toFixed(d).replace(/\.0$/, "") + " %";
 const pts = (x, d = 1) => (x >= 0 ? "+" : "−") + Math.abs(100 * x).toFixed(d) + " pts";
-const pf = p => p < 0.001 ? "< 0.001" : "= " + p.toFixed(3);  // p-value as text, never "0.000"
+const pf = p => p < 0.002 ? "< 0.002" : "= " + p.toFixed(3);  // p-value as text, never "0.000"; with 1,000 two-sided resamples, 0.002 is the smallest p they can show
 const points = (x, d = 1) => (100 * x).toFixed(d).replace("-", "−") + " points";  // for sentences: no "+" sign
 const NS = "http://www.w3.org/2000/svg";
 const tip = document.getElementById("tip");
@@ -364,7 +366,7 @@ function render(D) {
   f1.textContent = `On normal audio Whisper got ${pct(t.france.wer)} of words wrong for speakers from France, ` +
     `${pct(t.canada.wer)} for Canada and ${pct(t[cvAfrica].wer)} for Sub-Saharan Africa. ` +
     `Each gap with France is too large to be chance, on normal audio and on the phone line (p ≤ ${pMax1.toFixed(3)}). ` +
-    `The Yaoundé recordings come from another collection (people read old proverbs, which are harder), so they are a separate check, not a fair comparison.`;
+    `The Yaoundé recordings come from another collection (people read old proverbs, not Wikipedia sentences), so they are a separate check, not a fair comparison.`;
   let cond = "clean";
   const draw1 = () => {
     const s = S[cond + "_crossfit"];
@@ -452,22 +454,30 @@ function render(D) {
   const more = cmp.filter(r => r.repeat_gap > 0).length, sure = cmp.filter(r => r.repeat_gap > 0 && r.repeat_gap_p < 0.05).length;
   const gaps = cmp.map(r => Math.round(100 * r.repeat_gap));
   const aucs = order.map(g => S.phone_crossfit[g].auc);
+  const FA = S.phone_crossfit, faP = Math.min(...cmp.map(r => r.false_alarm_gap_p)), faMore = cmp.filter(r => r.false_alarm_gap > 0).length;
+  // Rough split: the African group's own share of misheard sentences, but France's repeat rates on correct and misheard ones.
+  const catchRate = x => (x.repeat - (1 - x.misheard) * x.false_alarm) / x.misheard;
+  const errPart = african.flatMap(g => runs.map(k => { const F = S[k].france, G = S[k][g];
+    return 100 * (G.misheard * catchRate(F) + (1 - G.misheard) * F.false_alarm - F.repeat); }));
   document.getElementById("f3-text").textContent =
     `I ran this comparison ${cmp.length} ways: both African groups, normal audio and phone line, and with each half of the speakers taking its turn as the test half. ` +
     `African-accented callers were asked to repeat more in ${more} of ${cmp.length} (${Math.min(...gaps)} to ${Math.max(...gaps)} more calls out of 100). ` +
     `Taken one by one, ${sure} of those ${cmp.length} gaps are large enough to rule out chance (p < 0.05); the others point the same way but are not proof on their own, and the ${cmp.length} versions share speakers, so they are not ${cmp.length} separate proofs. ` +
     `Canada is not asked to repeat more. ` +
+    `Is that only because Whisper makes more mistakes for them? Not mainly: a rough split (without a range) puts only ${Math.round(Math.min(...errPart))} to ${Math.round(Math.max(...errPart))} of those points on the extra mistakes. The rest comes from lower confidence scores on African-accented speech, on correct and misheard sentences alike. ` +
+    `Among the sentences Whisper heard with no error, the rule still asked for a repeat ${pct(FA[cvAfrica].false_alarm, 0)} of the time for Sub-Saharan African callers, against ${pct(FA.france.false_alarm, 0)} for France (phone line, all speakers). African-accented callers were asked more in ${faMore} of ${cmp.length} versions, but no single gap is large enough to rule out chance (p ≥ ${(Math.floor(faP * 100) / 100).toFixed(2)}). ` +
+    `A hint, not a proof, that the same rule costs them more even when Whisper hears them right. ` +
     `Why does the rule make so many people repeat? Whisper's sentence score is a weak alarm: it ranks a correctly heard sentence above a misheard one only ` +
-    `${Math.round(100 * Math.min(...aucs))} to ${Math.round(100 * Math.max(...aucs))} % of the time (a coin flip would give 50 %). So to let fewer than 5 calls in 100 through with a mistake, the agent has to ask most callers to repeat.`;
+    `${Math.round(100 * Math.min(...aucs))} to ${Math.round(100 * Math.max(...aucs))} % of the time (a coin flip would give 50 %). So to keep mistakes near 5 calls in 100, the agent has to ask most callers to repeat.`;
 
   // Finding 4: language hint (fix 1)
   const LH = D.language_hint, af4 = LH[cvAfrica], ca4 = LH.canada, fr4 = LH.france;
   document.getElementById("f4-text").textContent =
     `This is the fix the hackathon brief suggests. When Whisper has to guess the language, it guessed wrong for ${af4.wrong_language} of 100 African-accented calls and ${ca4.wrong_language} of 100 Canadian ones, against ${fr4.wrong_language} for France. ` +
     `It heard Korean, Italian or Haitian Creole, or translated the caller into English. ` +
-    `Saying “this is French” cuts errors by ${points(ca4.gain)} for Canada and ${points(af4.gain)} for Sub-Saharan Africa, and changes nothing for France (${points(fr4.gain)}). ` +
+    `Saying “this is French” cuts errors by ${points(ca4.gain)} for Canada and ${points(af4.gain)} for Sub-Saharan Africa, and changes nothing for France (${pct(fr4.wer_no_hint)} → ${pct(fr4.wer_fr_hint)}). ` +
     `So it narrows the gap with France: by ${points(ca4.narrowing)} for Canada (p ${pf(ca4.narrowing_p)}) and ${points(af4.narrowing)} for Sub-Saharan Africa (p ${pf(af4.narrowing_p)}, ${af4.narrowing_p < 0.05 ? "too large to be chance" : "just short of proof"}). ` +
-    `It is free, so every French phone agent should do it. My main measurements above already use it, so the gaps above are what remains after this fix.`;
+    `It is free, so a line that only takes French calls should always do it. My main measurements above already use it, so the gaps above are what remains after this fix.`;
   const svg4b = document.getElementById("c4b-svg");
   svg4b.innerHTML = svg4b.querySelector("desc").outerHTML;
   const g4 = order.filter(g => LH[g]);
@@ -522,15 +532,16 @@ function render(D) {
       const f = G.france, af = G[cvAfrica], fS = get("sentence", "france"), fT = get("targeted", "france"),
         aS = get("sentence", cvAfrica), aT = get("targeted", cvAfrica),
         lo = Math.min(...order.map(g => G[g].saved_share)), hi = Math.max(...order.map(g => G[g].saved_share)),
-        iLo = Math.min(...order.map(g => get("targeted", g).interrupted));
+        iLo = Math.min(...order.map(g => get("targeted", g).interrupted)), num = (x, d) => (+x).toFixed(d).replace("-", "−");
       document.getElementById("f5-text").textContent =
         `Instead of "could you repeat that?", the agent asks only about the words Whisper doubts (for example "did you say Mbarga?"). ` +
         `This needs a confidence score for each word, so it runs on Whisper large-v3-turbo on a laptop. ` +
         `Tuned to the same safety setting as before, every group says fewer words again: ${pct(lo, 0)} to ${pct(hi, 0)} fewer ` +
         `(France ${(+fS.words).toFixed(1)} to ${(+fT.words).toFixed(1)}, Sub-Saharan Africa ${(+aS.words).toFixed(1)} to ${(+aT.words).toFixed(1)}). ` +
-        `But the gap stays: Sub-Saharan African callers still say ${(+af.gap_targeted).toFixed(1)} more words per call than France ` +
-        `(p ${pf(af.gap_targeted_p).replace(" ", " ")}), against ${(+af.gap_sentence).toFixed(1)} with whole-sentence repeats. ` +
-        `How much the fix narrows the gap: between ${(+af.gap_change_lo).toFixed(1)} and +${(+af.gap_change_hi).toFixed(1)} words (95 % range), far from the ${(+af.gap_sentence).toFixed(1)} needed to close it. ` +
+        `But the gap stays: Sub-Saharan African callers still say ${num(af.gap_targeted, 2)} more words per call than France ` +
+        `(p ${pf(af.gap_targeted_p).replace(" ", " ")}), about the same as the ${num(af.gap_sentence, 2)} with whole-sentence repeats. ` +
+        `How much the fix narrows the gap: between ${num(af.gap_change_lo, 1)} and +${num(af.gap_change_hi, 1)} words (95 % range), far from the ${num(af.gap_sentence, 1)} needed to close it. ` +
+        (G.canada ? `For Canada the gap even grew, from ${num(G.canada.gap_sentence, 1)} to ${num(G.canada.gap_targeted, 1)} words (could be chance, p ${pf(G.canada.gap_change_p)}). ` : ``) +
         `And it asks almost every caller something: at least ${pct(iLo, 0)} of calls get a question. The fix makes the bill smaller for everyone. It does not make it fair.`;
     }
   }
@@ -539,7 +550,7 @@ function render(D) {
   const R = D.robustness.clean;
   const items = [
     `Sentences with a rare name removed: ${pct(R.france.wer_no_name)} errors for France, ${pct(R.canada.wer_no_name)} for Canada, ${pct(R[cvAfrica].wer_no_name)} for Sub-Saharan Africa. The gap stays.`,
-    `Only the cleaner half of the recordings (estimated noise level): ${pct(R.france.wer_good_mic)}, ${pct(R.canada.wer_good_mic)} and ${pct(R[cvAfrica].wer_good_mic)}. Recording quality is about the same in the three Common Voice groups (${R.france.snr_db.toFixed(0)}, ${R.canada.snr_db.toFixed(0)} and ${R[cvAfrica].snr_db.toFixed(0)} dB), so it does not explain the gap.`,
+    `Only the cleaner half of the recordings (estimated noise level): ${pct(R.france.wer_good_mic)}, ${pct(R.canada.wer_good_mic)} and ${pct(R[cvAfrica].wer_good_mic)}. The gap is smaller for Sub-Saharan Africa but stays. Recording quality is about the same in the three Common Voice groups (${R.france.snr_db.toFixed(0)}, ${R.canada.snr_db.toFixed(0)} and ${R[cvAfrica].snr_db.toFixed(0)} dB), so it does not explain the gap.`,
     `African sentences were slightly longer (${R[cvAfrica].mean_words.toFixed(1)} words against ${R.france.mean_words.toFixed(1)}). Giving every group France's mix of sentence lengths barely moves the share of misheard calls (${pct(R[cvAfrica].misheard)} → ${pct(R[cvAfrica].misheard_fr_length)}).`,
     `At most 4 clips per speaker, so a few very active volunteers cannot decide the result. Ranges come from resampling speakers, not clips.`,
     `For the repeat rule, the line is chosen on one half of the speakers and results are measured on the other half, then the halves swap. A rule is never judged on the people it was tuned on.`,
